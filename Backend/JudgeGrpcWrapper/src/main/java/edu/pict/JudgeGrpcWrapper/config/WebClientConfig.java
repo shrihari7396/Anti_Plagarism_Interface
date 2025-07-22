@@ -11,7 +11,7 @@ public class WebClientConfig {
     private String baseUrl;
 
     @Bean
-    public WebClient webClientBuilder() {
+    public WebClient webClientBean() {
         return WebClient.builder()
                 .baseUrl(baseUrl) // Replace with your actual base URL if different
                 .build();
