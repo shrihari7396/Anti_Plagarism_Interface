@@ -9,6 +9,9 @@
         <option value="$PROJECT_DIR$/Backend/ConfigServer/pom.xml" />
         <option value="$PROJECT_DIR$/Backend/EurekaServer/pom.xml" />
         <option value="$PROJECT_DIR$/Backend/UserManagement/pom.xml" />
+        <option value="$PROJECT_DIR$/Backend/TestCaseService/pom.xml" />
+        <option value="$PROJECT_DIR$/Backend/JudgeGrpcWrapper/pom.xml" />
+        <option value="$PROJECT_DIR$/Backend/QuestionMangement/pom.xml" />
       </list>
     </option>
   </component>

@@ -1,0 +1,335 @@
+/* Navbar.css - Complete with Dark Theme Support */
+
+/* ============ BASE VARIABLES ============ */
+:root {
+  /* Light Theme Colors */
+  --primary: #6c5ce7;
+  --primary-dark: #5649c0;
+  --secondary: #00cec9;
+  --accent: #fd79a8;
+  --text: #2d3436;
+  --text-secondary: #636e72;
+  --background: #f5f6fa;
+  --card-bg: #ffffff;
+  --border: rgba(0, 0, 0, 0.1);
+
+  /* Navbar Specific */
+  --nav-bg: rgba(255, 255, 255, 0.98);
+  --nav-border: rgba(0, 0, 0, 0.05);
+  --nav-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
+  --button-hover: rgba(108, 92, 231, 0.08);
+
+  /* Effects */
+  --transition: all 0.3s ease;
+  --blur: blur(12px);
+}
+
+/* ============ DARK THEME OVERRIDES ============ */
+[data-theme="dark"] {
+  --primary: #a29bfe;
+  --primary-dark: #6c5ce7;
+  --secondary: #55efc4;
+  --accent: #fd79a8;
+  --text: #f5f6fa;
+  --text-secondary: #b2bec3;
+  --background: #1a1e21;
+  --card-bg: #2d3436;
+  --border: rgba(255, 255, 255, 0.1);
+
+  /* Navbar Specific */
+  --nav-bg: rgba(33, 37, 41, 0.98);
+  --nav-border: rgba(255, 255, 255, 0.05);
+  --nav-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+  --button-hover: rgba(162, 155, 254, 0.08);
+}
+
+/* ============ BASE STYLES ============ */
+* {
+  transition: background-color 0.3s ease, color 0.2s ease;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--text);
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+}
+
+/* ============ NAVBAR CONTAINER ============ */
+.navbar {
+  position: fixed;
+  width: 100%;
+  top: 0;
+  background: var(--nav-bg);
+  backdrop-filter: var(--blur);
+  -webkit-backdrop-filter: var(--blur);
+  border-bottom: 1px solid var(--nav-border);
+  z-index: 1000;
+  box-shadow: var(--nav-shadow);
+  padding: 0 2rem;
+}
+
+.navbar-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  height: 80px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* ============ LOGO STYLES ============ */
+.logo-container {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.logo-orb {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  box-shadow: 0 8px 32px rgba(108, 92, 231, 0.3);
+  transition: var(--transition);
+}
+
+.logo-orb:hover {
+  transform: scale(1.05) rotate(5deg);
+  box-shadow: 0 12px 40px rgba(108, 92, 231, 0.4);
+}
+
+.logo-orb-inner {
+  position: relative;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logo-icon {
+  color: var(--primary);
+  z-index: 2;
+}
+
+.logo-orb-ring {
+  position: absolute;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  border: 2px dashed rgba(0, 206, 201, 0.6);
+  animation: spin 20s linear infinite;
+}
+
+.logo-icon-secondary {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  color: white;
+  background: var(--accent);
+  padding: 4px;
+  border-radius: 50%;
+  z-index: 3;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.logo-icon-tertiary {
+  position: absolute;
+  bottom: -6px;
+  left: -6px;
+  color: white;
+  background: var(--secondary);
+  padding: 3px;
+  border-radius: 50%;
+  z-index: 3;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.logo-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.logo-title {
+  font-size: 1.6rem;
+  font-weight: 800;
+  background: linear-gradient(to right, var(--primary), var(--secondary));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  letter-spacing: 1px;
+  margin: 0;
+}
+
+.logo-subtitle {
+  font-size: 0.65rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  margin-top: 2px;
+}
+
+/* ============ NAVIGATION BUTTONS ============ */
+.nav-buttons {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding-right: 30px;
+
+}
+
+.nav-button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--text);
+  background: none;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.nav-button:hover {
+  background: var(--button-hover);
+  color: var(--primary);
+}
+
+.nav-button .nav-icon {
+  color: var(--primary);
+  transition: var(--transition);
+}
+
+.nav-button:hover .nav-icon {
+  transform: translateX(2px);
+}
+
+/* ============ ADMIN BUTTON ============ */
+.admin-button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 18px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: white;
+  background: linear-gradient(to right, var(--secondary), var(--primary));
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: var(--transition);
+  box-shadow: 0 4px 15px rgba(0, 206, 201, 0.3);
+}
+
+.admin-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 206, 201, 0.4);
+}
+
+.admin-icon {
+  color: white;
+}
+
+/* ============ COLLEGE LOGO ============ */
+.college-logo {
+  width: 55px;
+  height: 55px;
+  border-radius: 30px;
+  overflow: hidden;
+  margin-left: 10px;
+}
+
+.college-logo-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: var(--transition);
+}
+
+[data-theme="dark"] .college-logo-img {
+  filter: brightness(0.85) contrast(1.1);
+}
+
+/* ============ DARK MODE TOGGLE ============ */
+.theme-toggle-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition);
+}
+
+.theme-toggle-button:hover {
+  background: var(--button-hover);
+}
+
+/* ============ RESPONSIVE ADJUSTMENTS ============ */
+@media (max-width: 768px) {
+  .navbar {
+    padding: 0 1rem;
+  }
+
+  .logo-title {
+    font-size: 1.4rem;
+  }
+
+  .logo-subtitle {
+    font-size: 0.6rem;
+  }
+
+  .nav-buttons {
+    gap: 12px;
+  }
+
+  .nav-button span,
+  .admin-button span {
+    display: none;
+  }
+
+  .nav-button,
+  .admin-button {
+    padding: 10px;
+  }
+
+  .college-logo {
+    width: 45px;
+    height: 45px;
+  }
+}
+
+@media (max-width: 480px) {
+  .logo-text {
+    display: none;
+  }
+
+  .logo-orb {
+    width: 40px;
+    height: 40px;
+  }
+
+  .logo-orb-inner {
+    width: 30px;
+    height: 30px;
+  }
+}
