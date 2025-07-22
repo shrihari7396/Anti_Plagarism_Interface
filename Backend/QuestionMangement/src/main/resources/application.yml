@@ -1,0 +1,24 @@
+spring:
+  application:
+    name: QuestionMangement
+
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/first
+    username: root
+    password: 899961
+
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+  instance:
+    prefer-ip-address: true
+server:
+  port: 8082
