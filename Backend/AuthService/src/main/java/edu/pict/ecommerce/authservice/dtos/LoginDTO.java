@@ -1,20 +1,14 @@
 package edu.pict.ecommerce.authservice.dtos;
 
 import edu.pict.ecommerce.authservice.model.enums.Role;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
 
 @Data
 @AllArgsConstructor
-@RequiredArgsConstructor
 @NoArgsConstructor
+@Builder
 public class LoginDTO {
     private String username;
-    private String firstName;
-    private String lastName;
-    private String email;
+    private String password;
     private Role role;
-    private String jwtToken;
 }

@@ -35,11 +35,6 @@ public class JWTFilter extends OncePerRequestFilter {
         final String jwt;
         final String username;
 
-        if (request.getServletPath().contains("/api/auth") || request.getServletPath().contains("/user/api/groq")) {
-            filterChain.doFilter(request, response);
-            return;
-        }
-
         if (authHeader == null || !authHeader.startsWith("Bearer ")) {
             filterChain.doFilter(request, response);
             return;
