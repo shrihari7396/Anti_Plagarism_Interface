@@ -52,5 +52,4 @@ public class Submission {
 
     @Column(name = "total_test_cases", nullable = false)
     private Integer totalTestCases;
-
 }
