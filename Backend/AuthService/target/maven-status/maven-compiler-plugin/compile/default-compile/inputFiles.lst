@@ -1,0 +1,17 @@
+C:\Users\hp\Desktop\Anti Plagarism Interface\Backend\AuthService\src\main\java\edu\pict\ecommerce\authservice\AuthServiceApplication.java
+C:\Users\hp\Desktop\Anti Plagarism Interface\Backend\AuthService\src\main\java\edu\pict\ecommerce\authservice\config\SecurityConfig.java
+C:\Users\hp\Desktop\Anti Plagarism Interface\Backend\AuthService\src\main\java\edu\pict\ecommerce\authservice\controller\AuthenticationController.java
+C:\Users\hp\Desktop\Anti Plagarism Interface\Backend\AuthService\src\main\java\edu\pict\ecommerce\authservice\controller\GlobalExceptionHandlerController.java
+C:\Users\hp\Desktop\Anti Plagarism Interface\Backend\AuthService\src\main\java\edu\pict\ecommerce\authservice\dtos\LoginDTO.java
+C:\Users\hp\Desktop\Anti Plagarism Interface\Backend\AuthService\src\main\java\edu\pict\ecommerce\authservice\dtos\LoginResponseDto.java
+C:\Users\hp\Desktop\Anti Plagarism Interface\Backend\AuthService\src\main\java\edu\pict\ecommerce\authservice\dtos\RegisterDTO.java
+C:\Users\hp\Desktop\Anti Plagarism Interface\Backend\AuthService\src\main\java\edu\pict\ecommerce\authservice\filter\JWTFilter.java
+C:\Users\hp\Desktop\Anti Plagarism Interface\Backend\AuthService\src\main\java\edu\pict\ecommerce\authservice\mapper\UserMapper.java
+C:\Users\hp\Desktop\Anti Plagarism Interface\Backend\AuthService\src\main\java\edu\pict\ecommerce\authservice\model\enums\Role.java
+C:\Users\hp\Desktop\Anti Plagarism Interface\Backend\AuthService\src\main\java\edu\pict\ecommerce\authservice\model\User.java
+C:\Users\hp\Desktop\Anti Plagarism Interface\Backend\AuthService\src\main\java\edu\pict\ecommerce\authservice\repository\UserRepository.java
+C:\Users\hp\Desktop\Anti Plagarism Interface\Backend\AuthService\src\main\java\edu\pict\ecommerce\authservice\service\AuthService.java
+C:\Users\hp\Desktop\Anti Plagarism Interface\Backend\AuthService\src\main\java\edu\pict\ecommerce\authservice\service\Implementation\AuthServiceImplementation.java
+C:\Users\hp\Desktop\Anti Plagarism Interface\Backend\AuthService\src\main\java\edu\pict\ecommerce\authservice\service\Implementation\JWTServiceImplementation.java
+C:\Users\hp\Desktop\Anti Plagarism Interface\Backend\AuthService\src\main\java\edu\pict\ecommerce\authservice\service\Implementation\UserDetailsServiceImplementation.java
+C:\Users\hp\Desktop\Anti Plagarism Interface\Backend\AuthService\src\main\java\edu\pict\ecommerce\authservice\service\JWTService.java
