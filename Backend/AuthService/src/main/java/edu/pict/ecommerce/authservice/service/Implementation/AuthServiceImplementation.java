@@ -11,7 +11,10 @@ import edu.pict.ecommerce.authservice.service.JWTService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.authentication.event.AuthenticationFailureBadCredentialsEvent;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -37,24 +40,34 @@ public class AuthServiceImplementation implements AuthService {
 
     @Override
     public LoginResponseDto validateUser(LoginDTO loginDTO) {
+        Authentication authentication = null;
         try {
-            Authentication authentication = authenticationManager.authenticate(
+            authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(loginDTO.getUsername(), loginDTO.getPassword())
             );
 
-            User user = userRepository.findByUsername(loginDTO.getUsername());
-            LoginResponseDto loginResponseDto = LoginResponseDto.builder()
-                    .firstName(user.getFirstName())
-                    .lastName(user.getLastName())
-                    .email(user.getEmail())
-                    .jwtToken(jwtService.generateToken(user.getUsername(), user.getRole().toString()))
-                    .build();
+            if (authentication.isAuthenticated()) {
+                // 3. Get user details
+                UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+                User user = userRepository.findByUsername(loginDTO.getUsername());
 
-            if(authentication.isAuthenticated()) {
-                return loginResponseDto;
+                // 4. Generate JWT
+                String token = jwtService.generateToken(
+                        userDetails.getUsername(),
+                        userDetails.getAuthorities().toString()
+                );
+
+                // 5. Return the response with token
+                return LoginResponseDto.builder()
+                        .firstName(user.getFirstName())
+                        .lastName(user.getLastName())
+                        .email(user.getEmail())
+                        .jwtToken(token)
+                        .build();
             }
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
+        } catch (AuthenticationException e) {
+            System.out.println("Authentication failed: " + e.getMessage());
+//            throw  new AuthenticationFailureBadCredentialsEvent(e);
         }
         return null;
     }

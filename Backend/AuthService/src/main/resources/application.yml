@@ -16,7 +16,7 @@ spring:
 
 jwt:
   secret: 7x9A$mK2#pQ8*vL5!nR3@wE6%tY1^uI4&oP7+sD0-fG9_hJ2=cV5~xZ8|aB4{mN6}qW3<eT7>yU1[iO0]lK9
-  expiration: 86400000
+  expiration: 864000000
 
 server:
   port: 8081

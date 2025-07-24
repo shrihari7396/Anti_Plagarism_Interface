@@ -1,10 +1,8 @@
 package edu.pict.ecommerce.authservice.service.Implementation;
 
-
 import edu.pict.ecommerce.authservice.service.JWTService;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 
 import org.springframework.beans.factory.annotation.Value;
@@ -12,6 +10,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import javax.crypto.SecretKey;
+import java.nio.charset.StandardCharsets;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -21,7 +20,10 @@ import java.util.function.Function;
 public class JWTServiceImplementation implements JWTService {
 
     private final String secretKey;
+    @Value("${jwt.expiration}")
+    private long tenDaysInMillis;
 
+    private Integer expiration;
     public JWTServiceImplementation(@Value("${jwt.secret}") String secretKey) {
 //        try {
 //            KeyGenerator keyGenerator = KeyGenerator.getInstance("HmacSHA256");
@@ -44,7 +46,7 @@ public class JWTServiceImplementation implements JWTService {
                 .add(claims)
                 .subject(username)
                 .issuedAt(new Date(System.currentTimeMillis()))
-                .expiration(new Date(System.currentTimeMillis() + 1000*60 * 60 * 30))
+                .expiration(new Date(System.currentTimeMillis() + tenDaysInMillis))
                 .and()
                 .signWith(getKey())
                 .compact();
@@ -57,7 +59,7 @@ public class JWTServiceImplementation implements JWTService {
 
     @Override
     public SecretKey getKey() {
-        byte[] keyBytes = Decoders.BASE64.decode(secretKey);
+        byte[] keyBytes = secretKey.getBytes(StandardCharsets.UTF_8);
         return Keys.hmacShaKeyFor(keyBytes);
     }
 
