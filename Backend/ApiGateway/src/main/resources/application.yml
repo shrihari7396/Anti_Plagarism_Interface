@@ -30,6 +30,19 @@ spring:
                 - AddRequestHeader=X-Custom-Header, Anuj
                 - RedirectTo=302, https://codingshuttle.com
 
+            - id: auth-service
+              uri: lb://AUTHSERVICE   # 🔥 Use Eureka name (uppercase)
+              predicates:
+                - Path=/api/v1/auth/**
+              filters:
+                - StripPrefix=2
+
+#      res
+#      resourceserver:
+#        jwt:
+#          # Provide your JWT secret/public key decoder here
+#          # OR configure a custom JWTAuthenticationFilter
+#          secret: your-secret-key
 eureka:
   client:
     service-url:
@@ -39,3 +52,14 @@ eureka:
 
 server:
   port: 8080
+
+jwt:
+  secret: 7x9A$mK2#pQ8*vL5!nR3@wE6%tY1^uI4&oP7+sD0-fG9_hJ2=cV5~xZ8|aB4{mN6}qW3<eT7>yU1[iO0]lK9
+  expiration: 864000000
+
+logging:
+  level:
+    org:
+      springframework:
+        web: DEBUG
+
