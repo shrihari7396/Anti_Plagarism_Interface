@@ -3,6 +3,7 @@ package edu.pict.ecommerce.authservice.controller;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -27,6 +28,11 @@ public class GlobalExceptionHandlerController {
 
     @ExceptionHandler(value = {UsernameNotFoundException.class})
     public ResponseEntity<?> handleUsernameNotFoundException(UsernameNotFoundException ex){
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(ex.getMessage());
+    }
+
+    @ExceptionHandler(value =  {AuthenticationException.class})
+    public ResponseEntity<?> handleAuthenticationException(AuthenticationException ex){
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(ex.getMessage());
     }
 }

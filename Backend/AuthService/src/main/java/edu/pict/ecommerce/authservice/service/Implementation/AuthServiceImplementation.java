@@ -8,16 +8,17 @@ import edu.pict.ecommerce.authservice.model.User;
 import edu.pict.ecommerce.authservice.repository.UserRepository;
 import edu.pict.ecommerce.authservice.service.AuthService;
 import edu.pict.ecommerce.authservice.service.JWTService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.authentication.event.AuthenticationFailureBadCredentialsEvent;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+@Slf4j
 @Service
 public class AuthServiceImplementation implements AuthService {
     @Autowired
@@ -66,8 +67,8 @@ public class AuthServiceImplementation implements AuthService {
                         .build();
             }
         } catch (AuthenticationException e) {
-            System.out.println("Authentication failed: " + e.getMessage());
-//            throw  new AuthenticationFailureBadCredentialsEvent(e);
+            log.error("Authentication failed: " + e.getMessage());
+            throw e;
         }
         return null;
     }
