@@ -9,19 +9,20 @@
         <outputRelativeToContentRoot value="true" />
         <module name="EurekaServer" />
       </profile>
-      <profile name="Annotation profile for ApiGateway" enabled="true">
+      <profile name="Annotation profile for SubmissionService" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="false">
           <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.38/lombok-1.18.38.jar" />
         </processorPath>
+        <module name="SubmissionService" />
+        <module name="JudgeGrpcWrapper" />
+        <module name="AuthService" />
         <module name="UserManagement" />
         <module name="TestCaseService" />
         <module name="QuestionMangement" />
-        <module name="SubmissionService" />
         <module name="ApiGateway" />
-        <module name="AuthService" />
       </profile>
     </annotationProcessing>
   </component>
@@ -30,6 +31,7 @@
       <module name="ApiGateway" options="-parameters" />
       <module name="AuthService" options="-parameters" />
       <module name="EurekaServer" options="-parameters" />
+      <module name="JudgeGrpcWrapper" options="-parameters" />
       <module name="QuestionMangement" options="-parameters" />
       <module name="SubmissionService" options="-parameters" />
       <module name="TestCaseService" options="-parameters" />

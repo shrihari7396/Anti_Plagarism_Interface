@@ -11,6 +11,7 @@
         <option value="$PROJECT_DIR$/TestCaseService/pom.xml" />
         <option value="$PROJECT_DIR$/ApiGateway/pom.xml" />
         <option value="$PROJECT_DIR$/AuthService/pom.xml" />
+        <option value="$PROJECT_DIR$/JudgeGrpcWrapper/pom.xml" />
       </list>
     </option>
   </component>

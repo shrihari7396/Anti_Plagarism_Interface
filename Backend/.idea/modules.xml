@@ -2,7 +2,12 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/ApiGateway/ApiGateway.iml" filepath="$PROJECT_DIR$/ApiGateway/ApiGateway.iml" />
+      <module fileurl="file://$PROJECT_DIR$/AuthService/AuthService.iml" filepath="$PROJECT_DIR$/AuthService/AuthService.iml" />
+      <module fileurl="file://$PROJECT_DIR$/EurekaServer/EurekaServer.iml" filepath="$PROJECT_DIR$/EurekaServer/EurekaServer.iml" />
+      <module fileurl="file://$PROJECT_DIR$/JudgeGrpcWrapper/JudgeGrpcWrapper.iml" filepath="$PROJECT_DIR$/JudgeGrpcWrapper/JudgeGrpcWrapper.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/LeetCode Project Backend.iml" filepath="$PROJECT_DIR$/.idea/LeetCode Project Backend.iml" />
+      <module fileurl="file://$PROJECT_DIR$/SubmissionService/SubmissionService.iml" filepath="$PROJECT_DIR$/SubmissionService/SubmissionService.iml" />
     </modules>
   </component>
 </project>
