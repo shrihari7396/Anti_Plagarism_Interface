@@ -1,5 +1,7 @@
 package edu.pict.JudgeGrpcWrapper.service;
 
+import edu.pict.ExecutionResult;
+import edu.pict.JudgeGrpcWrapper.dots.ExecutionResultDto;
 import edu.pict.JudgeGrpcWrapper.dots.RequestDto;
 import edu.pict.JudgeGrpcWrapper.mapper.Mapper;
 import edu.pict.SubmissionRequest;
@@ -10,7 +12,9 @@ import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
+import reactor.core.publisher.Mono;
 
+import java.util.HashMap;
 import java.util.Map;
 
 @Slf4j
@@ -36,6 +40,15 @@ public class Judge0Service {
                 .block();
         log.info("response={}", response);
         return response;
+    }
+
+    public Mono<ExecutionResultDto> getResponse(SubmissionResponseToken submissionResponseToken) {
+//        ExecutionResult
+        log.info("submissionResponseToken={}", submissionResponseToken);
+        return webClient.get()
+                .uri("/submissions/" + submissionResponseToken.getToken())
+                .retrieve()
+                .bodyToMono(ExecutionResultDto.class);
     }
 
 }

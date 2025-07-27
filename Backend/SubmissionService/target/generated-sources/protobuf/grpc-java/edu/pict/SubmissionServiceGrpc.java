@@ -43,6 +43,37 @@ public final class SubmissionServiceGrpc {
     return getSubmitRequestMethod;
   }
 
+  private static volatile io.grpc.MethodDescriptor<edu.pict.SubmissionResponseToken,
+      edu.pict.ExecutionResult> getGetResultByExecutionTokenMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "getResultByExecutionToken",
+      requestType = edu.pict.SubmissionResponseToken.class,
+      responseType = edu.pict.ExecutionResult.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<edu.pict.SubmissionResponseToken,
+      edu.pict.ExecutionResult> getGetResultByExecutionTokenMethod() {
+    io.grpc.MethodDescriptor<edu.pict.SubmissionResponseToken, edu.pict.ExecutionResult> getGetResultByExecutionTokenMethod;
+    if ((getGetResultByExecutionTokenMethod = SubmissionServiceGrpc.getGetResultByExecutionTokenMethod) == null) {
+      synchronized (SubmissionServiceGrpc.class) {
+        if ((getGetResultByExecutionTokenMethod = SubmissionServiceGrpc.getGetResultByExecutionTokenMethod) == null) {
+          SubmissionServiceGrpc.getGetResultByExecutionTokenMethod = getGetResultByExecutionTokenMethod =
+              io.grpc.MethodDescriptor.<edu.pict.SubmissionResponseToken, edu.pict.ExecutionResult>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "getResultByExecutionToken"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  edu.pict.SubmissionResponseToken.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  edu.pict.ExecutionResult.getDefaultInstance()))
+              .setSchemaDescriptor(new SubmissionServiceMethodDescriptorSupplier("getResultByExecutionToken"))
+              .build();
+        }
+      }
+    }
+    return getGetResultByExecutionTokenMethod;
+  }
+
   /**
    * Creates a new async stub that supports all call types for the service
    */
@@ -112,6 +143,13 @@ public final class SubmissionServiceGrpc {
         io.grpc.stub.StreamObserver<edu.pict.SubmissionResponseToken> responseObserver) {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getSubmitRequestMethod(), responseObserver);
     }
+
+    /**
+     */
+    default void getResultByExecutionToken(edu.pict.SubmissionResponseToken request,
+        io.grpc.stub.StreamObserver<edu.pict.ExecutionResult> responseObserver) {
+      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getGetResultByExecutionTokenMethod(), responseObserver);
+    }
   }
 
   /**
@@ -148,6 +186,14 @@ public final class SubmissionServiceGrpc {
       io.grpc.stub.ClientCalls.asyncUnaryCall(
           getChannel().newCall(getSubmitRequestMethod(), getCallOptions()), request, responseObserver);
     }
+
+    /**
+     */
+    public void getResultByExecutionToken(edu.pict.SubmissionResponseToken request,
+        io.grpc.stub.StreamObserver<edu.pict.ExecutionResult> responseObserver) {
+      io.grpc.stub.ClientCalls.asyncUnaryCall(
+          getChannel().newCall(getGetResultByExecutionTokenMethod(), getCallOptions()), request, responseObserver);
+    }
   }
 
   /**
@@ -172,6 +218,13 @@ public final class SubmissionServiceGrpc {
       return io.grpc.stub.ClientCalls.blockingUnaryCall(
           getChannel(), getSubmitRequestMethod(), getCallOptions(), request);
     }
+
+    /**
+     */
+    public edu.pict.ExecutionResult getResultByExecutionToken(edu.pict.SubmissionResponseToken request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getGetResultByExecutionTokenMethod(), getCallOptions(), request);
+    }
   }
 
   /**
@@ -195,6 +248,13 @@ public final class SubmissionServiceGrpc {
     public edu.pict.SubmissionResponseToken submitRequest(edu.pict.SubmissionRequest request) {
       return io.grpc.stub.ClientCalls.blockingUnaryCall(
           getChannel(), getSubmitRequestMethod(), getCallOptions(), request);
+    }
+
+    /**
+     */
+    public edu.pict.ExecutionResult getResultByExecutionToken(edu.pict.SubmissionResponseToken request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getGetResultByExecutionTokenMethod(), getCallOptions(), request);
     }
   }
 
@@ -221,9 +281,18 @@ public final class SubmissionServiceGrpc {
       return io.grpc.stub.ClientCalls.futureUnaryCall(
           getChannel().newCall(getSubmitRequestMethod(), getCallOptions()), request);
     }
+
+    /**
+     */
+    public com.google.common.util.concurrent.ListenableFuture<edu.pict.ExecutionResult> getResultByExecutionToken(
+        edu.pict.SubmissionResponseToken request) {
+      return io.grpc.stub.ClientCalls.futureUnaryCall(
+          getChannel().newCall(getGetResultByExecutionTokenMethod(), getCallOptions()), request);
+    }
   }
 
   private static final int METHODID_SUBMIT_REQUEST = 0;
+  private static final int METHODID_GET_RESULT_BY_EXECUTION_TOKEN = 1;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -245,6 +314,10 @@ public final class SubmissionServiceGrpc {
         case METHODID_SUBMIT_REQUEST:
           serviceImpl.submitRequest((edu.pict.SubmissionRequest) request,
               (io.grpc.stub.StreamObserver<edu.pict.SubmissionResponseToken>) responseObserver);
+          break;
+        case METHODID_GET_RESULT_BY_EXECUTION_TOKEN:
+          serviceImpl.getResultByExecutionToken((edu.pict.SubmissionResponseToken) request,
+              (io.grpc.stub.StreamObserver<edu.pict.ExecutionResult>) responseObserver);
           break;
         default:
           throw new AssertionError();
@@ -271,6 +344,13 @@ public final class SubmissionServiceGrpc {
               edu.pict.SubmissionRequest,
               edu.pict.SubmissionResponseToken>(
                 service, METHODID_SUBMIT_REQUEST)))
+        .addMethod(
+          getGetResultByExecutionTokenMethod(),
+          io.grpc.stub.ServerCalls.asyncUnaryCall(
+            new MethodHandlers<
+              edu.pict.SubmissionResponseToken,
+              edu.pict.ExecutionResult>(
+                service, METHODID_GET_RESULT_BY_EXECUTION_TOKEN)))
         .build();
   }
 
@@ -320,6 +400,7 @@ public final class SubmissionServiceGrpc {
           serviceDescriptor = result = io.grpc.ServiceDescriptor.newBuilder(SERVICE_NAME)
               .setSchemaDescriptor(new SubmissionServiceFileDescriptorSupplier())
               .addMethod(getSubmitRequestMethod())
+              .addMethod(getGetResultByExecutionTokenMethod())
               .build();
         }
       }

@@ -35,6 +35,16 @@ public final class SubmissionServiceProto {
   static final 
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_SubmissionResponseToken_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_ExecutionResult_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_ExecutionResult_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_ExecutionResult_Status_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_ExecutionResult_Status_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -60,10 +70,18 @@ public final class SubmissionServiceProto {
       "\n\016number_of_runs\030\022 \001(\005\022\030\n\020additional_fil" +
       "es\030\023 \001(\t\022\024\n\014callback_url\030\024 \001(\t\022\026\n\016base64" +
       "_encoded\030\025 \001(\010\"(\n\027SubmissionResponseToke" +
-      "n\022\r\n\005token\030\001 \001(\t2R\n\021SubmissionService\022=\n" +
-      "\rsubmitRequest\022\022.SubmissionRequest\032\030.Sub" +
-      "missionResponseTokenB$\n\010edu.pictB\026Submis" +
-      "sionServiceProtoP\001b\006proto3"
+      "n\022\r\n\005token\030\001 \001(\t\"\333\001\n\017ExecutionResult\022\016\n\006" +
+      "stdout\030\001 \001(\t\022\014\n\004time\030\002 \001(\t\022\016\n\006memory\030\003 \001" +
+      "(\t\022\016\n\006stderr\030\004 \001(\t\022\r\n\005token\030\005 \001(\t\022\026\n\016com" +
+      "pile_output\030\006 \001(\t\022\017\n\007message\030\007 \001(\t\022\'\n\006st" +
+      "atus\030\010 \001(\0132\027.ExecutionResult.Status\032)\n\006S" +
+      "tatus\022\n\n\002id\030\001 \001(\005\022\023\n\013description\030\002 \001(\t2\233" +
+      "\001\n\021SubmissionService\022=\n\rsubmitRequest\022\022." +
+      "SubmissionRequest\032\030.SubmissionResponseTo" +
+      "ken\022G\n\031getResultByExecutionToken\022\030.Submi" +
+      "ssionResponseToken\032\020.ExecutionResultB$\n\010" +
+      "edu.pictB\026SubmissionServiceProtoP\001b\006prot" +
+      "o3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -81,6 +99,18 @@ public final class SubmissionServiceProto {
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_SubmissionResponseToken_descriptor,
         new java.lang.String[] { "Token", });
+    internal_static_ExecutionResult_descriptor =
+      getDescriptor().getMessageTypes().get(2);
+    internal_static_ExecutionResult_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_ExecutionResult_descriptor,
+        new java.lang.String[] { "Stdout", "Time", "Memory", "Stderr", "Token", "CompileOutput", "Message", "Status", });
+    internal_static_ExecutionResult_Status_descriptor =
+      internal_static_ExecutionResult_descriptor.getNestedTypes().get(0);
+    internal_static_ExecutionResult_Status_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_ExecutionResult_Status_descriptor,
+        new java.lang.String[] { "Id", "Description", });
     descriptor.resolveAllFeaturesImmutable();
   }
 

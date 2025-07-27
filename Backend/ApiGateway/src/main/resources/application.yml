@@ -22,13 +22,14 @@ spring:
               filters:
                 - StripPrefix=2
 
-            - id: no-service
-              uri: lb://NO-SERVICE
+            - id: submission-service
+              uri: lb://SUBMISSIONSERVICE
               predicates:
-                - Path=/api/v1/no-service/**
+                - Path=/api/v1/submission/**
               filters:
                 - AddRequestHeader=X-Custom-Header, Anuj
-                - RedirectTo=302, https://codingshuttle.com
+                - StripPrefix=2
+#                - RedirectTo=302, https://codingshuttle.com
 
             - id: auth-service
               uri: lb://AUTHSERVICE   # 🔥 Use Eureka name (uppercase)

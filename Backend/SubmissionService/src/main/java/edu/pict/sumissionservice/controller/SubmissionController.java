@@ -1,15 +1,12 @@
 package edu.pict.sumissionservice.controller;
 
-import edu.pict.SubmissionResponseToken;
+import edu.pict.sumissionservice.dtos.ExecutionResultDto;
 import edu.pict.sumissionservice.dtos.SubmissionRequestDto;
 import edu.pict.sumissionservice.dtos.SubmissionResponseDto;
 import edu.pict.sumissionservice.service.SubmissionService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/submission")
@@ -23,6 +20,14 @@ public class SubmissionController {
     public SubmissionResponseDto submit(@RequestBody SubmissionRequestDto submissionRequestDto) {
         log.info("submissionRequestDto={}", submissionRequestDto);
         return submissionService.submitCode(submissionRequestDto);
+    }
+
+    @GetMapping("/{token}")
+    public ExecutionResultDto getSubmission(@PathVariable("token") String token) {
+        log.info("token={}", token);
+        SubmissionResponseDto dto = SubmissionResponseDto.builder()
+                .token(token).build();
+        return submissionService.getResponseUsingToken(dto);
     }
 
 }

@@ -1,8 +1,10 @@
 package edu.pict.sumissionservice.service;
 
+import edu.pict.ExecutionResult;
 import edu.pict.SubmissionRequest;
 import edu.pict.SubmissionResponseToken;
 import edu.pict.SubmissionServiceGrpc;
+import edu.pict.sumissionservice.dtos.ExecutionResultDto;
 import edu.pict.sumissionservice.dtos.SubmissionRequestDto;
 import edu.pict.sumissionservice.dtos.SubmissionResponseDto;
 import net.devh.boot.grpc.client.inject.GrpcClient;
@@ -40,6 +42,30 @@ public class SubmissionService {
                 .build();
         SubmissionResponseToken token = serviceBlockingStub.submitRequest(request);
         return SubmissionResponseDto.builder().token(token.getToken()).build();
+    }
+
+    public ExecutionResultDto getResponseUsingToken(SubmissionResponseDto submissionResponseDto) {
+        SubmissionResponseToken token = SubmissionResponseToken.newBuilder()
+                .setToken(submissionResponseDto.getToken())
+                .build();
+
+        ExecutionResult result = serviceBlockingStub.getResultByExecutionToken(token);
+
+        ExecutionResultDto.Status status = ExecutionResultDto.Status.builder()
+                .id(result.getStatus().getId())
+                .description(result.getStatus().getDescription())
+                .build();
+
+        return ExecutionResultDto.builder()
+                .stdout(result.getStdout())
+                .time(result.getTime())
+                .memory(result.getMemory())
+                .stderr(result.getStderr())
+                .token(result.getToken())
+                .compile_output(result.getCompileOutput())
+                .message(result.getMessage())
+                .status(status)
+                .build();
     }
 
 }

@@ -1,5 +1,7 @@
 package edu.pict.JudgeGrpcWrapper.service;
 
+import edu.pict.ExecutionResult;
+import edu.pict.JudgeGrpcWrapper.dots.ExecutionResultDto;
 import edu.pict.SubmissionRequest;
 import edu.pict.SubmissionResponseToken;
 import edu.pict.SubmissionServiceGrpc;
@@ -16,8 +18,38 @@ public class SubmissionServiceImpl extends SubmissionServiceGrpc.SubmissionServi
     @Override
     public void submitRequest(SubmissionRequest request,
                               StreamObserver<SubmissionResponseToken> responseObserver) {
-        SubmissionResponseToken response = SubmissionResponseToken.newBuilder().setToken(judge0Service.submitRequest(request).get("token").toString()).build();
+
+        SubmissionResponseToken response = SubmissionResponseToken.newBuilder()
+                .setToken(judge0Service.submitRequest(request).get("token").toString())
+                .build();
+
         responseObserver.onNext(response);
+        responseObserver.onCompleted();
+    }
+
+    @Override
+    public void getResultByExecutionToken(SubmissionResponseToken token, StreamObserver<ExecutionResult> responseObserver) {
+        ExecutionResultDto resultDto = judge0Service.getResponse(token).block();
+
+        assert resultDto != null;
+
+        ExecutionResult.Status status = ExecutionResult.Status.newBuilder()
+                .setId(resultDto.getStatus().getId())
+                .setDescription(resultDto.getStatus().getDescription())
+                .build();
+
+        ExecutionResult result = ExecutionResult.newBuilder()
+                .setStdout(resultDto.getStdout() == null ? "" : resultDto.getStdout())
+                .setTime(resultDto.getTime() == null ? "" : resultDto.getTime())
+                .setMemory(resultDto.getMemory() == null ? "" : resultDto.getMemory())
+                .setStderr(resultDto.getStderr() == null ? "" : resultDto.getStderr())
+                .setToken(resultDto.getToken() == null ? "" : resultDto.getToken())
+                .setCompileOutput(resultDto.getCompile_output() == null ? "" : resultDto.getCompile_output())
+                .setMessage(resultDto.getMessage() == null ? "" : resultDto.getMessage())
+                .setStatus(status)
+                .build();
+
+        responseObserver.onNext(result);
         responseObserver.onCompleted();
     }
 

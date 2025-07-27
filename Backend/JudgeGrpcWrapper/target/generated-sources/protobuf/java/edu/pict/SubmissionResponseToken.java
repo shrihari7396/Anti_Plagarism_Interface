@@ -5,14 +5,9 @@
 
 package edu.pict;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-
 /**
  * Protobuf type {@code SubmissionResponseToken}
  */
-
-@AllArgsConstructor
 public final class SubmissionResponseToken extends
     com.google.protobuf.GeneratedMessage implements
     // @@protoc_insertion_point(message_implements:SubmissionResponseToken)
@@ -28,7 +23,7 @@ private static final long serialVersionUID = 0L;
       SubmissionResponseToken.class.getName());
   }
   // Use SubmissionResponseToken.newBuilder() to construct.
-  public SubmissionResponseToken(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+  private SubmissionResponseToken(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
     super(builder);
   }
   private SubmissionResponseToken() {

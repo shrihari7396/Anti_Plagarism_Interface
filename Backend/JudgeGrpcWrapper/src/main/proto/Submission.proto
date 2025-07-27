@@ -34,6 +34,23 @@ message SubmissionResponseToken {
   string token = 1;
 }
 
+message ExecutionResult {
+  string stdout = 1;
+  string time = 2;
+  string memory = 3;
+  string stderr = 4;
+  string token = 5;
+  string compile_output = 6;
+  string message = 7;
+  Status status = 8;
+
+  message Status {
+    int32 id = 1;
+    string description = 2;
+  }
+}
+
 service SubmissionService {
   rpc submitRequest(SubmissionRequest) returns (SubmissionResponseToken);
+  rpc getResultByExecutionToken(SubmissionResponseToken) returns (ExecutionResult);
 }
