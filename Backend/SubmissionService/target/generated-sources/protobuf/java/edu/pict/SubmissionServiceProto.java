@@ -75,14 +75,14 @@ public final class SubmissionServiceProto {
       "(\t\022\016\n\006stderr\030\004 \001(\t\022\r\n\005token\030\005 \001(\t\022\026\n\016com" +
       "pile_output\030\006 \001(\t\022\017\n\007message\030\007 \001(\t\022\'\n\006st" +
       "atus\030\010 \001(\0132\027.ExecutionResult.Status\032)\n\006S" +
-      "tatus\022\n\n\002id\030\001 \001(\005\022\023\n\013description\030\002 \001(\t2\343" +
+      "tatus\022\n\n\002id\030\001 \001(\005\022\023\n\013description\030\002 \001(\t2\333" +
       "\001\n\021SubmissionService\022=\n\rsubmitRequest\022\022." +
       "SubmissionRequest\032\030.SubmissionResponseTo" +
       "ken\022G\n\031getResultByExecutionToken\022\030.Submi" +
-      "ssionResponseToken\032\020.ExecutionResult\022F\n\026" +
+      "ssionResponseToken\032\020.ExecutionResult\022>\n\026" +
       "instantExecutionResult\022\022.SubmissionReque" +
-      "st\032\030.SubmissionResponseTokenB$\n\010edu.pict" +
-      "B\026SubmissionServiceProtoP\001b\006proto3"
+      "st\032\020.ExecutionResultB$\n\010edu.pictB\026Submis" +
+      "sionServiceProtoP\001b\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,

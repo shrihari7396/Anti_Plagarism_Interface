@@ -7,93 +7,36 @@ import edu.pict.SubmissionServiceGrpc;
 import edu.pict.sumissionservice.dtos.ExecutionResultDto;
 import edu.pict.sumissionservice.dtos.SubmissionRequestDto;
 import edu.pict.sumissionservice.dtos.SubmissionResponseDto;
+import edu.pict.sumissionservice.mapper.Mapper;
 import net.devh.boot.grpc.client.inject.GrpcClient;
 import org.springframework.stereotype.Service;
 
+
+// All Method are written in this class are use in controller for give back response to user
 @Service
 public class SubmissionService {
 
+    // Works as Grpc Client helps in calling grpc method
+    // Configuration are present in application.yml file
     @GrpcClient("codeSubmission")
     private SubmissionServiceGrpc.SubmissionServiceBlockingStub serviceBlockingStub;
 
     public SubmissionResponseDto submitCode(SubmissionRequestDto submissionRequestDto) {
-        SubmissionRequest request = SubmissionRequest.newBuilder()
-                .setSourceCode(submissionRequestDto.getSourceCode())
-                .setLanguageId(submissionRequestDto.getLanguageId())
-                .setCompilerOptions(submissionRequestDto.getCompilerOption() != null ? submissionRequestDto.getCompilerOption() : "")
-                .setCommandLineArguments("")
-                .setStdin(submissionRequestDto.getStdin() != null ? submissionRequestDto.getStdin() : "")
-                .setExpectedOutput(submissionRequestDto.getStdout() != null ? submissionRequestDto.getStdout() : "")
-                .setCpuTimeLimit(1.0f)
-                .setCpuExtraTime(0.5f)
-                .setWallTimeLimit(2.0f)
-                .setMemoryLimit(128000) // 128 MB in KB
-                .setStackLimit(64000) // 64 MB
-                .setMaxProcessesAndOrThreads(60)
-                .setEnablePerProcessAndThreadTimeLimit(false)
-                .setEnablePerProcessAndThreadMemoryLimit(false)
-                .setMaxFileSize(1024)
-                .setRedirectStderrToStdout(true)
-                .setEnableNetwork(false)
-                .setNumberOfRuns(1)
-                .setAdditionalFiles("")
-                .setCallbackUrl("")
-                .setBase64Encoded(submissionRequestDto.getBase64Encoded() != null ? submissionRequestDto.getBase64Encoded() : false)
-                .build();
-        SubmissionResponseToken token = serviceBlockingStub.submitRequest(request);
+        SubmissionRequest request = Mapper.submissionRequestDtoToSubmissionRequest(submissionRequestDto); // Mapping is Done in Mapper class Using its static functions
+        SubmissionResponseToken token = serviceBlockingStub.submitRequest(request); // Calling Grpc Method
         return SubmissionResponseDto.builder().token(token.getToken()).build();
     }
 
     public ExecutionResultDto getResponseUsingToken(SubmissionResponseDto submissionResponseDto) {
-        SubmissionResponseToken token = SubmissionResponseToken.newBuilder()
-                .setToken(submissionResponseDto.getToken())
-                .build();
-
-        ExecutionResult result = serviceBlockingStub.getResultByExecutionToken(token);
-
-        ExecutionResultDto.Status status = ExecutionResultDto.Status.builder()
-                .id(result.getStatus().getId())
-                .description(result.getStatus().getDescription())
-                .build();
-
-        return ExecutionResultDto.builder()
-                .stdout(result.getStdout())
-                .time(result.getTime())
-                .memory(result.getMemory())
-                .stderr(result.getStderr())
-                .token(result.getToken())
-                .compile_output(result.getCompileOutput())
-                .message(result.getMessage())
-                .status(status)
-                .build();
+        SubmissionResponseToken token = Mapper.submissionResponseDtoToSubmissionResponseToken(submissionResponseDto); // Mapping is Done in Mapper class Using its static functions
+        ExecutionResult result = serviceBlockingStub.getResultByExecutionToken(token); // Calling Grpc Method
+        return Mapper.executionResultToExecutionResultDto(result);
     }
 
-    public SubmissionResponseDto instantExecutionResult(SubmissionRequestDto submissionRequestDto) {
-        SubmissionRequest request = SubmissionRequest.newBuilder()
-                .setSourceCode(submissionRequestDto.getSourceCode())
-                .setLanguageId(submissionRequestDto.getLanguageId())
-                .setCompilerOptions(submissionRequestDto.getCompilerOption() != null ? submissionRequestDto.getCompilerOption() : "")
-                .setCommandLineArguments("")
-                .setStdin(submissionRequestDto.getStdin() != null ? submissionRequestDto.getStdin() : "")
-                .setExpectedOutput(submissionRequestDto.getStdout() != null ? submissionRequestDto.getStdout() : "")
-                .setCpuTimeLimit(1.0f)
-                .setCpuExtraTime(0.5f)
-                .setWallTimeLimit(2.0f)
-                .setMemoryLimit(128000) // 128 MB in KB
-                .setStackLimit(64000) // 64 MB
-                .setMaxProcessesAndOrThreads(60)
-                .setEnablePerProcessAndThreadTimeLimit(false)
-                .setEnablePerProcessAndThreadMemoryLimit(false)
-                .setMaxFileSize(1024)
-                .setRedirectStderrToStdout(true)
-                .setEnableNetwork(false)
-                .setNumberOfRuns(1)
-                .setAdditionalFiles("")
-                .setCallbackUrl("")
-                .setBase64Encoded(submissionRequestDto.getBase64Encoded() != null ? submissionRequestDto.getBase64Encoded() : false)
-                .build();
-
-        return null;
+    public ExecutionResultDto instantExecutionResult(SubmissionRequestDto submissionRequestDto) {
+        SubmissionRequest request = Mapper.submissionRequestDtoToSubmissionRequest(submissionRequestDto); // Mapping is Done in Mapper class Using its static functions
+        ExecutionResult result = serviceBlockingStub.instantExecutionResult(request); // Calling Grpc Method
+        return Mapper.executionResultToExecutionResultDto(result);
     }
 
 }

@@ -53,5 +53,5 @@ message ExecutionResult {
 service SubmissionService {
   rpc submitRequest(SubmissionRequest) returns (SubmissionResponseToken);
   rpc getResultByExecutionToken(SubmissionResponseToken) returns (ExecutionResult);
-  rpc instantExecutionResult(SubmissionRequest) returns (SubmissionResponseToken);
+  rpc instantExecutionResult(SubmissionRequest) returns (ExecutionResult);
 }

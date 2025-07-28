@@ -18,16 +18,21 @@ public class SubmissionController {
 
     @PostMapping("/submit")
     public SubmissionResponseDto submit(@RequestBody SubmissionRequestDto submissionRequestDto) {
-        log.info("submissionRequestDto={}", submissionRequestDto);
+        log.info("submissionRequestDto={}, from submit", submissionRequestDto);
         return submissionService.submitCode(submissionRequestDto);
     }
 
     @GetMapping("/{token}")
     public ExecutionResultDto getSubmission(@PathVariable("token") String token) {
-        log.info("token={}", token);
+        log.info("token={} from getSubmission", token);
         SubmissionResponseDto dto = SubmissionResponseDto.builder()
                 .token(token).build();
         return submissionService.getResponseUsingToken(dto);
+    }
+
+    public ExecutionResultDto getInstantSubmission(@RequestBody SubmissionRequestDto submissionRequestDto) {
+        log.info("submissionRequestDto={}, from getInstantSubmission", submissionRequestDto);
+        return submissionService.instantExecutionResult(submissionRequestDto);
     }
 
 }

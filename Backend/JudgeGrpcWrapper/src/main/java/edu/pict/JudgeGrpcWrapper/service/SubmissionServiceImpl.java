@@ -8,12 +8,15 @@ import edu.pict.SubmissionServiceGrpc;
 import io.grpc.stub.StreamObserver;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.grpc.server.service.GrpcService;
+import org.springframework.web.client.RestClient;
 
 @GrpcService
 public class SubmissionServiceImpl extends SubmissionServiceGrpc.SubmissionServiceImplBase {
 
     @Autowired
     private Judge0Service judge0Service;
+    @Autowired
+    private RestClient.Builder builder;
 
     @Override
     public void submitRequest(SubmissionRequest request,
@@ -53,6 +56,29 @@ public class SubmissionServiceImpl extends SubmissionServiceGrpc.SubmissionServi
         responseObserver.onCompleted();
     }
 
+    @Override
+    public void instantExecutionResult(SubmissionRequest submissionRequest, StreamObserver<ExecutionResult> responseObserver) {
+        ExecutionResultDto resultDto = judge0Service.instantExecutionResult(submissionRequest).block();
 
+        assert resultDto != null;
+
+        ExecutionResult.Status status = ExecutionResult.Status.newBuilder()
+                .setId(resultDto.getStatus().getId())
+                .setDescription(resultDto.getStatus().getDescription())
+                .build();
+
+        ExecutionResult result = ExecutionResult.newBuilder()
+                .setStdout(resultDto.getStdout())
+                .setTime(resultDto.getTime())
+                .setMemory(resultDto.getTime())
+                .setToken(resultDto.getToken())
+                .setCompileOutput(resultDto.getCompile_output())
+                .setMessage(resultDto.getMessage())
+                .setStatus(status)
+                .build();
+
+        responseObserver.onNext(result);
+        responseObserver.onCompleted();
+    }
 
 }
