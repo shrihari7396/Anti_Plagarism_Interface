@@ -1,6 +1,5 @@
 package edu.pict.JudgeGrpcWrapper.service;
 
-import edu.pict.ExecutionResult;
 import edu.pict.JudgeGrpcWrapper.dots.ExecutionResultDto;
 import edu.pict.JudgeGrpcWrapper.dots.RequestDto;
 import edu.pict.JudgeGrpcWrapper.mapper.Mapper;
@@ -14,7 +13,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
 
-import java.util.HashMap;
 import java.util.Map;
 
 @Slf4j
