@@ -51,5 +51,16 @@ public class Judge0Service {
                 .bodyToMono(ExecutionResultDto.class);
     }
 
+    public Mono<ExecutionResultDto> instantExecutionResult(SubmissionRequest submissionRequest) {
+        log.info("submissionRequest={}", submissionRequest);
+        return webClient.post()
+                .uri("/submissions/?base64_encoded=false&wait=true")
+                .header("Accept", "application/json;charset=utf-8")
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON)
+                .bodyValue(submissionRequest)
+                .retrieve()
+                .bodyToMono(ExecutionResultDto.class);
+    }
 }
 
