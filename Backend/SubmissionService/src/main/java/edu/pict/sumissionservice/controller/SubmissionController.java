@@ -30,6 +30,7 @@ public class SubmissionController {
         return submissionService.getResponseUsingToken(dto);
     }
 
+    @PostMapping("/instantExecution")
     public ExecutionResultDto getInstantSubmission(@RequestBody SubmissionRequestDto submissionRequestDto) {
         log.info("submissionRequestDto={}, from getInstantSubmission", submissionRequestDto);
         return submissionService.instantExecutionResult(submissionRequestDto);

@@ -51,7 +51,7 @@ public class Judge0Service {
                 .bodyToMono(ExecutionResultDto.class);
     }
 
-    public Mono<ExecutionResultDto> instantExecutionResult(SubmissionRequest submissionRequest) {
+    public Map<String, Object> instantExecutionResult(SubmissionRequest submissionRequest) {
         log.info("submissionRequest={}", submissionRequest);
         return webClient.post()
                 .uri("/submissions/?base64_encoded=false&wait=true")
@@ -60,7 +60,8 @@ public class Judge0Service {
                 .accept(MediaType.APPLICATION_JSON)
                 .bodyValue(submissionRequest)
                 .retrieve()
-                .bodyToMono(ExecutionResultDto.class);
+                .bodyToMono(new ParameterizedTypeReference<Map<String, Object>>() {})
+                .block();
     }
 }
 

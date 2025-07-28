@@ -58,33 +58,4 @@ public class Mapper {
                 .build();
     }
 
-
-
-//    public static SubmissionRequestDto submissionRequestToSubmissionRequestDto(SubmissionRequest submissionRequestDto) {
-//        return SubmissionRequest.newBuilder()
-//                .setSourceCode(submissionRequestDto.getSourceCode())
-//                .setLanguageId(submissionRequestDto.getLanguageId())
-//                .setCompilerOptions(submissionRequestDto.getCompilerOption() != null ? submissionRequestDto.getCompilerOption() : "")
-//                .setCommandLineArguments("")
-//                .setStdin(submissionRequestDto.getStdin() != null ? submissionRequestDto.getStdin() : "")
-//                .setExpectedOutput(submissionRequestDto.getStdout() != null ? submissionRequestDto.getStdout() : "")
-//                .setCpuTimeLimit(1.0f)
-//                .setCpuExtraTime(0.5f)
-//                .setWallTimeLimit(2.0f)
-//                .setMemoryLimit(128000) // 128 MB in KB
-//                .setStackLimit(64000) // 64 MB
-//                .setMaxProcessesAndOrThreads(60)
-//                .setEnablePerProcessAndThreadTimeLimit(false)
-//                .setEnablePerProcessAndThreadMemoryLimit(false)
-//                .setMaxFileSize(1024)
-//                .setRedirectStderrToStdout(true)
-//                .setEnableNetwork(false)
-//                .setNumberOfRuns(1)
-//                .setAdditionalFiles("")
-//                .setCallbackUrl("")
-//                .setBase64Encoded(submissionRequestDto.getBase64Encoded() != null ? submissionRequestDto.getBase64Encoded() : false)
-//                .build();
-//    }
-
-
 }

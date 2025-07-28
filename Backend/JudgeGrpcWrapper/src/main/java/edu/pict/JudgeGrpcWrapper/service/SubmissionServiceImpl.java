@@ -2,6 +2,7 @@ package edu.pict.JudgeGrpcWrapper.service;
 
 import edu.pict.ExecutionResult;
 import edu.pict.JudgeGrpcWrapper.dots.ExecutionResultDto;
+import edu.pict.JudgeGrpcWrapper.mapper.Mapper;
 import edu.pict.SubmissionRequest;
 import edu.pict.SubmissionResponseToken;
 import edu.pict.SubmissionServiceGrpc;
@@ -9,6 +10,8 @@ import io.grpc.stub.StreamObserver;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.grpc.server.service.GrpcService;
 import org.springframework.web.client.RestClient;
+
+import java.util.Map;
 
 @GrpcService
 public class SubmissionServiceImpl extends SubmissionServiceGrpc.SubmissionServiceImplBase {
@@ -58,7 +61,9 @@ public class SubmissionServiceImpl extends SubmissionServiceGrpc.SubmissionServi
 
     @Override
     public void instantExecutionResult(SubmissionRequest submissionRequest, StreamObserver<ExecutionResult> responseObserver) {
-        ExecutionResultDto resultDto = judge0Service.instantExecutionResult(submissionRequest).block();
+        Map<String, Object> resultMap = judge0Service.instantExecutionResult(submissionRequest);
+
+        ExecutionResultDto resultDto = Mapper.mapToExecutionResultDto(resultMap);
 
         assert resultDto != null;
 
