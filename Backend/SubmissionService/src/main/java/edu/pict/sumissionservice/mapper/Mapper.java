@@ -13,6 +13,7 @@ public class Mapper {
         return SubmissionRequest.newBuilder()
                 .setSourceCode(submissionRequestDto.getSourceCode())
                 .setLanguageId(submissionRequestDto.getLanguageId())
+                .setExpectedOutput(submissionRequestDto.getExpectedOutput())
                 .setCompilerOptions(submissionRequestDto.getCompilerOption() != null ? submissionRequestDto.getCompilerOption() : "")
                 .setCommandLineArguments("")
                 .setStdin(submissionRequestDto.getStdin() != null ? submissionRequestDto.getStdin() : "")

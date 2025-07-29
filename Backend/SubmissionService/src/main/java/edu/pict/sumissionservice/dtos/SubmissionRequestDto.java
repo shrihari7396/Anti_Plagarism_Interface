@@ -17,5 +17,7 @@ public class SubmissionRequestDto {
     private String compilerOption;
     private String stdin;
     private String stdout;
+    private String expectedOutput;
     private Boolean base64Encoded;
+    private Integer problemId;
 }
