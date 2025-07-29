@@ -1,0 +1,26 @@
+package edu.pict.ecommerce.questionmangement.dto;
+
+import edu.pict.ecommerce.questionmangement.model.enums.Difficulty;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import java.time.LocalDateTime;
+import java.util.List;
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
+public class QuestionResponseDTO {
+    private Long id;
+    private String title;
+    private String description;
+    private String constraints;
+    private Difficulty difficulty;
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
+    private List<TopicResponseDTO> topics;
+}
+

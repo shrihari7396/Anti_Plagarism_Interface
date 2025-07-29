@@ -1,7 +1,7 @@
 package edu.pict.ecommerce.questionmangement.model.enums;
 
 public enum Difficulty {
-    EASY,
-    MEDIUM,
-    HARD
+    Easy,
+    Medium,
+    Hard
 }

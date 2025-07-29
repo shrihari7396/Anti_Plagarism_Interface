@@ -19,6 +19,7 @@ public class Question {
     private Long id;
 
     private String title;
+    @Lob
     private String description;
 
     @ManyToMany(fetch = FetchType.EAGER)
@@ -27,7 +28,7 @@ public class Question {
             joinColumns = @JoinColumn(name = "question_id"),
             inverseJoinColumns = @JoinColumn(name = "topic_id")
     )
-    private List<Topic> topics = new ArrayList<>();    @Lob
+    private List<Topic> topics = new ArrayList<>();
     private String constraints;
 
     @Enumerated(EnumType.STRING)
