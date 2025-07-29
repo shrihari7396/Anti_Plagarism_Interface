@@ -1,12 +1,11 @@
 package edu.pict.ecommerce.questionmangement.model;
 
 import edu.pict.ecommerce.questionmangement.model.enums.Difficulty;
-import edu.pict.ecommerce.questionmangement.model.enums.Topics;
 import jakarta.persistence.*;
 import lombok.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 @Entity
 @Data
@@ -16,17 +15,19 @@ import java.util.UUID;
 public class Question {
 
     @Id
-    @GeneratedValue
-    private UUID id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-    @Column(nullable = false)
     private String title;
-
-    @Lob
-    @Column(nullable = false)
     private String description;
 
-    @Lob
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "question_topic",
+            joinColumns = @JoinColumn(name = "question_id"),
+            inverseJoinColumns = @JoinColumn(name = "topic_id")
+    )
+    private List<Topic> topics = new ArrayList<>();    @Lob
     private String constraints;
 
     @Enumerated(EnumType.STRING)
@@ -39,3 +40,5 @@ public class Question {
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 }
+
+

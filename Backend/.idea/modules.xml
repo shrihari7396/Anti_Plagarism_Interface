@@ -7,6 +7,7 @@
       <module fileurl="file://$PROJECT_DIR$/EurekaServer/EurekaServer.iml" filepath="$PROJECT_DIR$/EurekaServer/EurekaServer.iml" />
       <module fileurl="file://$PROJECT_DIR$/JudgeGrpcWrapper/JudgeGrpcWrapper.iml" filepath="$PROJECT_DIR$/JudgeGrpcWrapper/JudgeGrpcWrapper.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/LeetCode Project Backend.iml" filepath="$PROJECT_DIR$/.idea/LeetCode Project Backend.iml" />
+      <module fileurl="file://$PROJECT_DIR$/QuestionMangement/QuestionMangement.iml" filepath="$PROJECT_DIR$/QuestionMangement/QuestionMangement.iml" />
       <module fileurl="file://$PROJECT_DIR$/SubmissionService/SubmissionService.iml" filepath="$PROJECT_DIR$/SubmissionService/SubmissionService.iml" />
     </modules>
   </component>
