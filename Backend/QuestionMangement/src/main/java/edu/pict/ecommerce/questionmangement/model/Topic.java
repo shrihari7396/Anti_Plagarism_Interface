@@ -1,10 +1,7 @@
 package edu.pict.ecommerce.questionmangement.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,15 +10,21 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@RequiredArgsConstructor
+@Builder
 public class Topic {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String name;
+    private String topic;
 
     @ManyToMany(mappedBy = "topics")
     private List<Question> questions = new ArrayList<>();
+
+    public Topic(String topic) {
+        this.topic = topic;
+    }
 }
 
 /*

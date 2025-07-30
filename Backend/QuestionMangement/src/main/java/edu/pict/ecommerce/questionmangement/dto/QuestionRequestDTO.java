@@ -1,5 +1,6 @@
 package edu.pict.ecommerce.questionmangement.dto;
 
+import edu.pict.ecommerce.questionmangement.model.Topic;
 import edu.pict.ecommerce.questionmangement.model.enums.Difficulty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -15,5 +16,5 @@ public class QuestionRequestDTO {
     private String description;
     private String constraints;
     private Difficulty difficulty;
-    private List<String> topicNames;  // e.g., ["Array", "Backtracking"]
+    private List<TopicRequestDto> topics;  // e.g., ["Array", "Backtracking"]
 }

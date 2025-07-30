@@ -42,11 +42,17 @@ public class QuestionMapper {
                 .build();
     }
 
+    public static Topic topicResponseDtoToTopic(TopicResponseDTO dto) {
+        return Topic.builder()
+                .topic(dto.getTopic())
+                .build();
+    }
+
     // Convert Topic entity to TopicResponseDTO
     public static TopicResponseDTO toTopicResponseDto(Topic topic) {
         TopicResponseDTO dto = new TopicResponseDTO();
         dto.setId(topic.getId());
-        dto.setName(topic.getName());
+        dto.setTopic(topic.getTopic());
         return dto;
     }
 }
