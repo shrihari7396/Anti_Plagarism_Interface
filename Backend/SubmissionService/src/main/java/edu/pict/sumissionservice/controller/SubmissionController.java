@@ -22,6 +22,11 @@ public class SubmissionController {
         return submissionService.submitCode(submissionRequestDto);
     }
 
+    @GetMapping("/hello")
+    public String hello() {
+        return "hello";
+    }
+
     @GetMapping("/{token}")
     public ExecutionResultDto getSubmission(@PathVariable("token") String token) {
         log.info("token={} from getSubmission", token);

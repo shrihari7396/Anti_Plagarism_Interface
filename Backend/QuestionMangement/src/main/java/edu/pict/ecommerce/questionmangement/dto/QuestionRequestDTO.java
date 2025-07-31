@@ -1,6 +1,5 @@
 package edu.pict.ecommerce.questionmangement.dto;
 
-import edu.pict.ecommerce.questionmangement.model.Topic;
 import edu.pict.ecommerce.questionmangement.model.enums.Difficulty;
 import lombok.AllArgsConstructor;
 import lombok.Data;

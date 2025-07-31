@@ -16,25 +16,25 @@ public class QuestionController {
     @Autowired
     private QuestionService questionService;
 
-    @DeleteMapping("/deleteQuestion/{questionId}")
-    public QuestionResponseDTO deleteQuestion(@PathVariable("questionId") Long questionId) {
-        return null;
-    }
-
     @GetMapping("/questions/{userId}")
     public List<QuestionResponseDTO> getQuestionByUserId(@PathVariable("userId") Long userId) {
+
         return null;
     }
 
-
-    @GetMapping("/getQuestion/{questionId}")
-    public QuestionResponseDTO getQuestion(@PathVariable("questionId") Long questionId) {
-        return questionService.getQuestionById(questionId).get();
+    @DeleteMapping("/deleteQuestion/{questionId}")
+    public void deleteQuestion(@PathVariable("questionId") Long questionId) {
+        questionService.deleteQuestion(questionId);
     }
 
     @PostMapping("/addQuestion")
     public QuestionResponseDTO addQuestion(@RequestBody QuestionRequestDTO questionRequestDTO) {
         return questionService.createQuestion(questionRequestDTO);
+    }
+
+    @GetMapping("/getQuestion/{questionId}")
+    public QuestionResponseDTO getQuestion(@PathVariable("questionId") Long questionId) {
+        return questionService.getQuestionById(questionId).get();
     }
 
     @GetMapping("/questions")
