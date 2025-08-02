@@ -13,7 +13,6 @@ spring:
     hibernate:
       ddl-auto: update
 
-
 eureka:
   client:
     service-url:
@@ -24,3 +23,14 @@ eureka:
 server:
   port: 8082
 
+grpc:
+  client:
+    TestCaseService:
+      address: "static://localhost:9092"
+      negotiationType: PLAINTEXT
+
+logging:
+  level:
+    org:
+      springframework:
+        web: DEBUG

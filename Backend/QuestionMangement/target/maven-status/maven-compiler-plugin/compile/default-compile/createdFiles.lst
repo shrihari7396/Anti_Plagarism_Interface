@@ -1,3 +1,4 @@
+edu\pict\ecommerce\questionmangement\service\TestCaseServiceImpl.class
 edu\pict\TestCaseResponse.class
 edu\pict\TestCaseResponse$Builder.class
 edu\pict\TestCaseServiceGrpc.class
