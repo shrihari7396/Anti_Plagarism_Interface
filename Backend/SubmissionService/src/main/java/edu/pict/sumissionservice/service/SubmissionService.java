@@ -11,7 +11,6 @@ import edu.pict.sumissionservice.mapper.Mapper;
 import net.devh.boot.grpc.client.inject.GrpcClient;
 import org.springframework.stereotype.Service;
 
-
 // All Method are written in this class are use in controller for give back response to user
 @Service
 public class SubmissionService {
