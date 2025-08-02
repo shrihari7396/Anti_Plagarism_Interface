@@ -16,4 +16,5 @@ public class QuestionRequestDTO {
     private String constraints;
     private Difficulty difficulty;
     private List<TopicRequestDto> topics;  // e.g., ["Array", "Backtracking"]
+    List<TestcaseDto> testcases;
 }

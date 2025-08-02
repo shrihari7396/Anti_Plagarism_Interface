@@ -30,13 +30,13 @@ public class QuestionMapper {
 
 
     // Convert Request DTO to Question entity
-    public static Question toEntity(QuestionRequestDTO dto, List<Topic> topicEntities) {
+    public static Question toEntity(QuestionRequestDTO dto, List<Topic> topics) {
         return Question.builder()
                 .title(dto.getTitle())
                 .description(dto.getDescription())
                 .constraints(dto.getConstraints())
                 .difficulty(dto.getDifficulty())
-                .topics(topicEntities)
+                .topics(topics)
                 .createdAt(LocalDateTime.now())
                 .updatedAt(LocalDateTime.now())
                 .build();

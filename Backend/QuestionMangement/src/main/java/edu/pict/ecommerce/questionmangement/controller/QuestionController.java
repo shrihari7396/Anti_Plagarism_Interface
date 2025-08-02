@@ -18,7 +18,6 @@ public class QuestionController {
 
     @GetMapping("/questions/{userId}")
     public List<QuestionResponseDTO> getQuestionByUserId(@PathVariable("userId") Long userId) {
-
         return null;
     }
 

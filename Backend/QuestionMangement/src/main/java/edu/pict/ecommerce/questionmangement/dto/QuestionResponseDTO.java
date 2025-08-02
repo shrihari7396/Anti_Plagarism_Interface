@@ -8,13 +8,14 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.UUID;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
 public class QuestionResponseDTO {
-    private Long id;
+    private UUID id;
     private String title;
     private String description;
     private String constraints;
@@ -22,5 +23,6 @@ public class QuestionResponseDTO {
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
     private List<TopicResponseDTO> topics;
+    private List<TestcaseDto> testcases;
 }
 

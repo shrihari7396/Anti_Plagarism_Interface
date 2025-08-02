@@ -39,7 +39,7 @@ public class QuestionService {
     }
 
     public QuestionResponseDTO createQuestion(QuestionRequestDTO questionRequestDTO) {
-        List<Topic> topics = questionRequestDTO.getTopics().stream()
+        List<Topic> topics = questionRequestDTO.getTopics().parallelStream()
                 .map(dto -> topicRepository.findByTopic(dto.getTopic())
                         .orElseGet(() -> topicRepository.save(
                                 new Topic(dto.getTopic())

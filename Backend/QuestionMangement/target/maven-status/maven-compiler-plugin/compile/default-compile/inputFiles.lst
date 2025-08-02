@@ -1,0 +1,16 @@
+C:\Users\hp\Desktop\Anti Plagarism Interface\Backend\QuestionMangement\src\main\java\edu\pict\ecommerce\questionmangement\controller\QuestionController.java
+C:\Users\hp\Desktop\Anti Plagarism Interface\Backend\QuestionMangement\src\main\java\edu\pict\ecommerce\questionmangement\controller\QuestionControllerAdvice.java
+C:\Users\hp\Desktop\Anti Plagarism Interface\Backend\QuestionMangement\src\main\java\edu\pict\ecommerce\questionmangement\dto\QuestionRequestDTO.java
+C:\Users\hp\Desktop\Anti Plagarism Interface\Backend\QuestionMangement\src\main\java\edu\pict\ecommerce\questionmangement\dto\QuestionResponseDTO.java
+C:\Users\hp\Desktop\Anti Plagarism Interface\Backend\QuestionMangement\src\main\java\edu\pict\ecommerce\questionmangement\dto\TestcaseDto.java
+C:\Users\hp\Desktop\Anti Plagarism Interface\Backend\QuestionMangement\src\main\java\edu\pict\ecommerce\questionmangement\dto\TopicRequestDto.java
+C:\Users\hp\Desktop\Anti Plagarism Interface\Backend\QuestionMangement\src\main\java\edu\pict\ecommerce\questionmangement\dto\TopicResponseDTO.java
+C:\Users\hp\Desktop\Anti Plagarism Interface\Backend\QuestionMangement\src\main\java\edu\pict\ecommerce\questionmangement\exception\QuestionNotFoundException.java
+C:\Users\hp\Desktop\Anti Plagarism Interface\Backend\QuestionMangement\src\main\java\edu\pict\ecommerce\questionmangement\mapper\QuestionMapper.java
+C:\Users\hp\Desktop\Anti Plagarism Interface\Backend\QuestionMangement\src\main\java\edu\pict\ecommerce\questionmangement\model\enums\Difficulty.java
+C:\Users\hp\Desktop\Anti Plagarism Interface\Backend\QuestionMangement\src\main\java\edu\pict\ecommerce\questionmangement\model\Question.java
+C:\Users\hp\Desktop\Anti Plagarism Interface\Backend\QuestionMangement\src\main\java\edu\pict\ecommerce\questionmangement\model\Topic.java
+C:\Users\hp\Desktop\Anti Plagarism Interface\Backend\QuestionMangement\src\main\java\edu\pict\ecommerce\questionmangement\QuestionManagementApplication.java
+C:\Users\hp\Desktop\Anti Plagarism Interface\Backend\QuestionMangement\src\main\java\edu\pict\ecommerce\questionmangement\repository\QuestionRepository.java
+C:\Users\hp\Desktop\Anti Plagarism Interface\Backend\QuestionMangement\src\main\java\edu\pict\ecommerce\questionmangement\repository\TopicRepository.java
+C:\Users\hp\Desktop\Anti Plagarism Interface\Backend\QuestionMangement\src\main\java\edu\pict\ecommerce\questionmangement\service\QuestionService.java

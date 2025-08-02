@@ -6,6 +6,7 @@ import lombok.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @Entity
 @Data
@@ -15,10 +16,14 @@ import java.util.List;
 public class Question {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private UUID id;
 
     private String title;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
+    private Long displayNumber;
+
     @Lob
     private String description;
 
@@ -41,6 +46,10 @@ public class Question {
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
+    private float timeLimit; // in seconds
+
+    private int memoryLimit; // in MB
+
     @PrePersist
     protected void onCreate() {
         this.createdAt = LocalDateTime.now();
@@ -50,7 +59,4 @@ public class Question {
     protected void onUpdate() {
         this.updatedAt = LocalDateTime.now();
     }
-
 }
-
-
