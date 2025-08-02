@@ -26,5 +26,5 @@ server:
 
 grpc:
   server:
-    port: 9094  # gRPC server runs on this port
+    port: 9092  # gRPC server runs on this port
     enable-reflection: true  # Enables gRPC reflection for tools like Postman

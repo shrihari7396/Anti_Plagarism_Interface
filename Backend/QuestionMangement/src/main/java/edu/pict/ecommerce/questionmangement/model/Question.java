@@ -20,7 +20,6 @@ public class Question {
     private UUID id;
 
     private String title;
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
 
     private Long displayNumber;
 
