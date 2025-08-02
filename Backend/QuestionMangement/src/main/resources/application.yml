@@ -35,5 +35,3 @@ logging:
     org:
       springframework:
         web: DEBUG
-
-
