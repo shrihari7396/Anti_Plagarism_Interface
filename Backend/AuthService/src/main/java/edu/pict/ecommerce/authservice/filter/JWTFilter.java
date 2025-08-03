@@ -15,18 +15,36 @@ import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
 
+/**
+ * Filter that processes incoming HTTP requests to validate JWT tokens.
+ * Ensures that if a valid token is present, the user is authenticated in the security context.
+ */
 @Component
 public class JWTFilter extends OncePerRequestFilter {
 
     private final JWTService jwtService;
     private final UserDetailsService userDetailsService;
 
-    // Use constructor injection instead of @Autowired
+    /**
+     * Constructs a JWTFilter with the given JWTService and UserDetailsService.
+     *
+     * @param jwtService         service used to handle JWT operations
+     * @param userDetailsService service used to load user-specific data
+     */
     public JWTFilter(JWTService jwtService, UserDetailsService userDetailsService) {
         this.jwtService = jwtService;
         this.userDetailsService = userDetailsService;
     }
 
+    /**
+     * Filters each incoming request to validate and process the JWT token from the Authorization header.
+     *
+     * @param request     the HTTP servlet request
+     * @param response    the HTTP servlet response
+     * @param filterChain the filter chain
+     * @throws ServletException in case of a servlet error
+     * @throws IOException      in case of an IO error
+     */
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
@@ -35,6 +53,7 @@ public class JWTFilter extends OncePerRequestFilter {
         final String jwt;
         final String username;
 
+        // If header is missing or doesn't start with Bearer, skip filtering
         if (authHeader == null || !authHeader.startsWith("Bearer ")) {
             filterChain.doFilter(request, response);
             return;
@@ -42,11 +61,14 @@ public class JWTFilter extends OncePerRequestFilter {
 
         jwt = authHeader.substring(7);
         try {
+            // Extract username from token
             username = jwtService.extractUserName(jwt);
 
+            // Proceed only if user is not already authenticated
             if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
                 UserDetails userDetails = this.userDetailsService.loadUserByUsername(username);
 
+                // Validate token and set authentication context
                 if (jwtService.validateToken(jwt, userDetails)) {
                     UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
                             userDetails,
@@ -58,18 +80,18 @@ public class JWTFilter extends OncePerRequestFilter {
                 }
             }
         } catch (io.jsonwebtoken.ExpiredJwtException ex) {
-            // Token expired — respond with 401 and custom message if desired
+            // JWT token has expired
             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
             response.getWriter().write("Token expired. Please login again.");
-            return; // Don't continue filter chain
+            return;
         } catch (Exception ex) {
-            // Optional: handle other token parsing exceptions
+            // General token processing exception
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             response.getWriter().write("Invalid token.");
             return;
         }
 
+        // Continue the filter chain
         filterChain.doFilter(request, response);
     }
 }
-
