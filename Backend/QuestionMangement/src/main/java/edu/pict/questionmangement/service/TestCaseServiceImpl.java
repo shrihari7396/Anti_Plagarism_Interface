@@ -50,7 +50,7 @@ public class TestCaseServiceImpl {
         // Convert the gRPC response back to DTOs and return
         return storedTestCases.getTestcasesList().stream()
                 .map(TestCaseMapper::testCaseToTestcaseDto)
-                .toList(); // Use .collect(Collectors.toList()) if Java <16
+                .toList();
     }
 
     /**
