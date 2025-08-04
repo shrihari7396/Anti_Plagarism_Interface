@@ -10,18 +10,6 @@ public interface TestCaseOrBuilder extends
     com.google.protobuf.MessageOrBuilder {
 
   /**
-   * <code>string questionId = 1;</code>
-   * @return The questionId.
-   */
-  java.lang.String getQuestionId();
-  /**
-   * <code>string questionId = 1;</code>
-   * @return The bytes for questionId.
-   */
-  com.google.protobuf.ByteString
-      getQuestionIdBytes();
-
-  /**
    * <code>string input = 2;</code>
    * @return The input.
    */

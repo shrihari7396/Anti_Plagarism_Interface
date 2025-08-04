@@ -20,8 +20,7 @@ public class TestCaseService extends TestCaseServiceGrpc.TestCaseServiceImplBase
     @Override
     public void storeTestCases(TestCases request,
                                StreamObserver<TestCases> responseObserver) {
-        List<TestCase> testCases = request.getTestcasesList();
-        List<TestcaseEntity> testcaseEntities = testCases.parallelStream().map(TestCaseMapper::testCaseToTestcaseEntity).toList();
+        List<TestcaseEntity> testcaseEntities = TestCaseMapper.testcasesToTestcaseEntities(request);
         testcaseRepository.saveAll(testcaseEntities);
         responseObserver.onNext(request);
         responseObserver.onCompleted();

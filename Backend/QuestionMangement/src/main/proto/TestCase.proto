@@ -6,7 +6,6 @@ option java_package = "edu.pict";
 option java_outer_classname="TestcaseServiceProto";
 
 message TestCase {
-  string questionId = 1;
   string input = 2;
   string expectedOutput = 3;
   bool hidden = 4;
@@ -14,7 +13,8 @@ message TestCase {
 
 
 message TestCases {
-  repeated TestCase testcases = 1;
+  string questionId = 1;
+  repeated TestCase testcases = 2;
 }
 
 message TestCaseRequest {

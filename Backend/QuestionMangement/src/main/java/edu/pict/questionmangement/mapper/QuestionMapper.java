@@ -2,6 +2,7 @@ package edu.pict.questionmangement.mapper;
 
 import edu.pict.questionmangement.dto.QuestionRequestDTO;
 import edu.pict.questionmangement.dto.QuestionResponseDTO;
+import edu.pict.questionmangement.dto.TopicRequestDto;
 import edu.pict.questionmangement.dto.TopicResponseDTO;
 import edu.pict.questionmangement.model.Question;
 import edu.pict.questionmangement.model.Topic;
@@ -43,6 +44,12 @@ public class QuestionMapper {
     }
 
     public static Topic topicResponseDtoToTopic(TopicResponseDTO dto) {
+        return Topic.builder()
+                .topic(dto.getTopic())
+                .build();
+    }
+
+    public static Topic topicRequestDtoToTopic(TopicRequestDto dto) {
         return Topic.builder()
                 .topic(dto.getTopic())
                 .build();

@@ -1,9 +1,14 @@
 package edu.pict.testCaseService.mapper;
 
 import edu.pict.TestCase;
+import edu.pict.TestCases;
 import edu.pict.testCaseService.model.TestcaseEntity;
+import org.w3c.dom.stylesheets.LinkStyle;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 public class TestCaseMapper {
 
@@ -14,12 +19,19 @@ public class TestCaseMapper {
                 .build();
     }
 
-    public static TestcaseEntity testCaseToTestcaseEntity(TestCase testCase) {
+    public static TestcaseEntity testCaseToTestcaseEntity(TestCase testCase, UUID testcaseId) {
         return TestcaseEntity.builder()
+                .questionId(testcaseId)
                 .input(testCase.getInput())
                 .expectedOutput(testCase.getExpectedOutput())
-                .questionId(UUID.fromString(testCase.getQuestionId()))
                 .build();
     }
 
+    public static List<TestcaseEntity> testcasesToTestcaseEntities(TestCases testcases) {
+        List<TestCase> testcaseList = testcases.getTestcasesList();
+        UUID questionId = UUID.fromString(testcases.getQuestionId());
+        return testcaseList.parallelStream()
+                .map(testCase -> testCaseToTestcaseEntity(testCase, questionId))
+                .collect(Collectors.toList());
+    }
 }

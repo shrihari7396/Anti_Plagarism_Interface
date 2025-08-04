@@ -7,4 +7,3 @@ public class TopicResponseDTO {
     private Long id;
     private String topic;
 }
-

@@ -10,25 +10,37 @@ public interface TestCasesOrBuilder extends
     com.google.protobuf.MessageOrBuilder {
 
   /**
-   * <code>repeated .TestCase testcases = 1;</code>
+   * <code>string questionId = 1;</code>
+   * @return The questionId.
+   */
+  java.lang.String getQuestionId();
+  /**
+   * <code>string questionId = 1;</code>
+   * @return The bytes for questionId.
+   */
+  com.google.protobuf.ByteString
+      getQuestionIdBytes();
+
+  /**
+   * <code>repeated .TestCase testcases = 2;</code>
    */
   java.util.List<edu.pict.TestCase> 
       getTestcasesList();
   /**
-   * <code>repeated .TestCase testcases = 1;</code>
+   * <code>repeated .TestCase testcases = 2;</code>
    */
   edu.pict.TestCase getTestcases(int index);
   /**
-   * <code>repeated .TestCase testcases = 1;</code>
+   * <code>repeated .TestCase testcases = 2;</code>
    */
   int getTestcasesCount();
   /**
-   * <code>repeated .TestCase testcases = 1;</code>
+   * <code>repeated .TestCase testcases = 2;</code>
    */
   java.util.List<? extends edu.pict.TestCaseOrBuilder> 
       getTestcasesOrBuilderList();
   /**
-   * <code>repeated .TestCase testcases = 1;</code>
+   * <code>repeated .TestCase testcases = 2;</code>
    */
   edu.pict.TestCaseOrBuilder getTestcasesOrBuilder(
       int index);

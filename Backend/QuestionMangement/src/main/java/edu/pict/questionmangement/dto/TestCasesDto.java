@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.List;
+import java.util.UUID;
 
 
 // This is for Multiple testCases
@@ -14,5 +15,6 @@ import java.util.List;
 @NoArgsConstructor
 @Builder
 public class TestCasesDto {
-    List<TestcaseDto> testcases;
+    private UUID questionId;
+    private List<TestcaseDto> testcases;
 }

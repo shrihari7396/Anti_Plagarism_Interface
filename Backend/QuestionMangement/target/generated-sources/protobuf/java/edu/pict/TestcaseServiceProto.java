@@ -54,10 +54,10 @@ public final class TestcaseServiceProto {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\016TestCase.proto\"U\n\010TestCase\022\022\n\nquestion" +
-      "Id\030\001 \001(\t\022\r\n\005input\030\002 \001(\t\022\026\n\016expectedOutpu" +
-      "t\030\003 \001(\t\022\016\n\006hidden\030\004 \001(\010\")\n\tTestCases\022\034\n\t" +
-      "testcases\030\001 \003(\0132\t.TestCase\"%\n\017TestCaseRe" +
+      "\n\016TestCase.proto\"A\n\010TestCase\022\r\n\005input\030\002 " +
+      "\001(\t\022\026\n\016expectedOutput\030\003 \001(\t\022\016\n\006hidden\030\004 " +
+      "\001(\010\"=\n\tTestCases\022\022\n\nquestionId\030\001 \001(\t\022\034\n\t" +
+      "testcases\030\002 \003(\0132\t.TestCase\"%\n\017TestCaseRe" +
       "quest\022\022\n\nquestionId\030\001 \001(\t\"0\n\020TestCaseRes" +
       "ponse\022\034\n\ttestcases\030\001 \003(\0132\t.TestCase2|\n\017T" +
       "estCaseService\022(\n\016storeTestCases\022\n.TestC" +
@@ -75,13 +75,13 @@ public final class TestcaseServiceProto {
     internal_static_TestCase_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_TestCase_descriptor,
-        new java.lang.String[] { "QuestionId", "Input", "ExpectedOutput", "Hidden", });
+        new java.lang.String[] { "Input", "ExpectedOutput", "Hidden", });
     internal_static_TestCases_descriptor =
       getDescriptor().getMessageTypes().get(1);
     internal_static_TestCases_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_TestCases_descriptor,
-        new java.lang.String[] { "Testcases", });
+        new java.lang.String[] { "QuestionId", "Testcases", });
     internal_static_TestCaseRequest_descriptor =
       getDescriptor().getMessageTypes().get(2);
     internal_static_TestCaseRequest_fieldAccessorTable = new
