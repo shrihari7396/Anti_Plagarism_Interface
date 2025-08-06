@@ -36,8 +36,8 @@ public class TestCaseServiceImpl {
 
         // Convert DTOs to gRPC Testcase Protobuf messages
         TestCases testCases = TestCases.newBuilder()
-                .setQuestionId(testCasesDto.getQuestionId().toString())
-                .addAllTestcases(
+                .setQuestionId(testCasesDto.getQuestionId().toString()) // set QuestionId
+                .addAllTestcases(// Fill up the testcases in Arraylist
                         testCasesDto.getTestcases().stream()
                                 .map(TestCaseMapper::testCaseDtoToTestcase)
                                 .toList()

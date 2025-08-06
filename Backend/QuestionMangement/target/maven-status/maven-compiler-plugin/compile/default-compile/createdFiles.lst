@@ -2,6 +2,7 @@ edu\pict\TestCaseResponse.class
 edu\pict\questionmangement\controller\QuestionController.class
 edu\pict\questionmangement\dto\TopicRequestDto$TopicRequestDtoBuilder.class
 edu\pict\TestCaseResponse$Builder.class
+edu\pict\questionmangement\controller\AdminQuestionController.class
 edu\pict\TestCaseServiceGrpc.class
 edu\pict\TestCaseServiceGrpc$TestCaseServiceFileDescriptorSupplier.class
 edu\pict\questionmangement\dto\TestcaseDto.class

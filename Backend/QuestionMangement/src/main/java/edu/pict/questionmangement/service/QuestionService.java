@@ -7,6 +7,7 @@ import edu.pict.questionmangement.model.Question;
 import edu.pict.questionmangement.model.Topic;
 import edu.pict.questionmangement.repository.QuestionRepository;
 import edu.pict.questionmangement.repository.TopicRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -14,9 +15,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class QuestionService {
@@ -30,33 +30,69 @@ public class QuestionService {
     @Autowired
     private TestCaseServiceImpl  testCaseServiceImpl;
 
+    @Transactional
     public QuestionResponseDTO addQuestion(QuestionRequestDTO questionRequestDTO) {
-        List<TopicRequestDto> topicRequestDto = questionRequestDTO.getTopics();
+        // Step 1: Extract topics from DTO
+        List<TopicRequestDto> topicRequestDtos = questionRequestDTO.getTopics();
 
-        // Stores the topic and question maintaining their relation with each other
-        List<Topic> topics = topicRequestDto.stream().map(QuestionMapper::topicRequestDtoToTopic).toList();
-        List<Topic> storedTopics = topicRepository.saveAll(topics);
-        Question questionList = questionRepository.save(QuestionMapper.toEntity(questionRequestDTO, storedTopics));
-        UUID  questionId = questionList.getId();
+        // Step 2: Convert DTOs to Topic entities
+        List<Topic> topics = topicRequestDtos.stream()
+                .map(QuestionMapper::topicRequestDtoToTopic)
+                .toList();
 
-        // Following two for storing testcases in the testcases service using grpc
+        // Step 3: Check which topics already exist
+        List<String> topicNames = topics.stream()
+                .map(Topic::getTopic)
+                .toList();
+
+        List<Topic> existingTopics = topicRepository.findByTopicIn(topicNames);
+        Set<String> existingTopicNames = existingTopics.stream()
+                .map(Topic::getTopic)
+                .collect(Collectors.toSet());
+
+        // Step 4: Filter and save only new topics
+        List<Topic> newTopics = topics.stream()
+                .filter(topic -> !existingTopicNames.contains(topic.getTopic()))
+                .toList();
+
+        List<Topic> storedNewTopics = topicRepository.saveAll(newTopics);
+
+        // Step 5: Combine all topics (existing + new)
+        List<Topic> finalTopics = new ArrayList<>();
+        finalTopics.addAll(existingTopics);
+        finalTopics.addAll(storedNewTopics);
+
+        // Step 6: Save question with all related topics
+        Question storedQuestion = questionRepository.save(
+                QuestionMapper.toEntity(questionRequestDTO, finalTopics)
+        );
+
+        UUID questionId = storedQuestion.getId();
+
+        // Step 7: Store test cases via gRPC
         TestCasesDto testCasesDto = questionRequestDTO.getTestcases();
         testCasesDto.setQuestionId(questionId);
         List<TestcaseDto> storedTestCases = testCaseServiceImpl.storeTestCases(testCasesDto);
-        List<TopicResponseDTO> topicResponseDTO = storedTopics.stream().map(QuestionMapper::toTopicResponseDto).toList();
 
+        // Step 8: Convert topics to response DTOs
+        List<TopicResponseDTO> topicResponseDTOs = finalTopics.stream()
+                .map(QuestionMapper::toTopicResponseDto)
+                .toList();
+
+        // Step 9: Build and return response
         return QuestionResponseDTO.builder()
                 .id(questionId)
-                .title(questionList.getTitle())
-                .description(questionList.getDescription())
-                .constraints(questionList.getConstraints())
-                .difficulty(questionList.getDifficulty())
-                .createdAt(questionList.getCreatedAt())
-                .updatedAt(questionList.getUpdatedAt())
-                .topics(topicResponseDTO)
+                .title(storedQuestion.getTitle())
+                .description(storedQuestion.getDescription())
+                .constraints(storedQuestion.getConstraints())
+                .difficulty(storedQuestion.getDifficulty())
+                .createdAt(storedQuestion.getCreatedAt())
+                .updatedAt(storedQuestion.getUpdatedAt())
+                .topics(topicResponseDTOs)
                 .testcases(storedTestCases)
                 .build();
     }
+
 
     public Page<QuestionResponseDTO> getPaginatedQuestions(int page, int size) {
         Pageable pageable = PageRequest.of(page, size, Sort.by("createdAt").ascending());
@@ -64,25 +100,13 @@ public class QuestionService {
         return questionPage.map(QuestionMapper::toResponseDto);
     }
 
-    public Optional<QuestionResponseDTO> getQuestionById(Long id) {
+    public Optional<QuestionResponseDTO> getQuestionById(UUID id) {
         Optional<Question> question = questionRepository.findById(id);
         return question.map(value -> Optional.of(QuestionMapper.toResponseDto(value))).orElseThrow(() -> new QuestionNotFoundException("Question not found", new Question()));
     }
 
-    public QuestionResponseDTO createQuestion(QuestionRequestDTO questionRequestDTO) {
-        List<Topic> topics = questionRequestDTO.getTopics().parallelStream()
-                .map(dto -> topicRepository.findByTopic(dto.getTopic())
-                        .orElseGet(() -> topicRepository.save(
-                                new Topic(dto.getTopic())
-                        ))
-                )
-                .toList();
-        Question question = QuestionMapper.toEntity(questionRequestDTO, topics);
-        questionRepository.save(question);
-        return QuestionMapper.toResponseDto(question);
-    }
 
-    public void deleteQuestion(Long id) {
+    public void deleteQuestion(UUID id) {
         questionRepository.deleteById(id);
     }
 

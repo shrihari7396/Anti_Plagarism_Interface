@@ -8,12 +8,12 @@ spring:
         webflux:
           routes:
             - id: order-service
-              uri: lb://ORDER-SERVICE
+              uri: lb://QUESTIONMANAGEMENT
               predicates:
-                - Path=/api/v1/orders/**
+                - Path=/api/v1/questions/**
               filters:
                 - StripPrefix=2
-                - AddRequestHeader=X-Custom-Header, Anuj
+#                - AddRequestHeader=X-Custom-Header, Anuj
 
             - id: inventory-service
               uri: lb://INVENTORY-SERVICE
