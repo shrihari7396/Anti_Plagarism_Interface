@@ -12,6 +12,7 @@
         <option value="$PROJECT_DIR$/Backend/TestCaseService/pom.xml" />
         <option value="$PROJECT_DIR$/Backend/JudgeGrpcWrapper/pom.xml" />
         <option value="$PROJECT_DIR$/Backend/QuestionMangement/pom.xml" />
+        <option value="$PROJECT_DIR$/Backend/SubmissionService/pom.xml" />
       </list>
     </option>
   </component>

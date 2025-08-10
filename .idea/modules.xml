@@ -3,6 +3,12 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/Anti Plagarism Interface.iml" filepath="$PROJECT_DIR$/.idea/Anti Plagarism Interface.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Backend/ApiGateway/ApiGateway.iml" filepath="$PROJECT_DIR$/Backend/ApiGateway/ApiGateway.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Backend/AuthService/AuthService.iml" filepath="$PROJECT_DIR$/Backend/AuthService/AuthService.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Backend/EurekaServer/EurekaServer.iml" filepath="$PROJECT_DIR$/Backend/EurekaServer/EurekaServer.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Backend/JudgeGrpcWrapper/JudgeGrpcWrapper.iml" filepath="$PROJECT_DIR$/Backend/JudgeGrpcWrapper/JudgeGrpcWrapper.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Backend/QuestionMangement/QuestionMangement.iml" filepath="$PROJECT_DIR$/Backend/QuestionMangement/QuestionMangement.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Backend/TestCaseService/TestCaseService.iml" filepath="$PROJECT_DIR$/Backend/TestCaseService/TestCaseService.iml" />
     </modules>
   </component>
 </project>

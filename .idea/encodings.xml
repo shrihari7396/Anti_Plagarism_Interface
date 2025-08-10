@@ -7,6 +7,7 @@
     <file url="file://$PROJECT_DIR$/Backend/EurekaServer/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/Backend/JudgeGrpcWrapper/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/Backend/QuestionMangement/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Backend/SubmissionService/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/Backend/TestCaseService/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/Backend/UserManagement/src/main/java" charset="UTF-8" />
   </component>
