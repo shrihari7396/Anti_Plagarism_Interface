@@ -23,6 +23,6 @@ public class QuestionResponseDTO {
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
     private List<TopicResponseDTO> topics;
-    private List<TestcaseDto> testcases;
+    private TestCasesDto testcases;
 }
 

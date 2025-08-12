@@ -1,9 +1,6 @@
 package edu.pict.questionmangement.mapper;
 
-import edu.pict.questionmangement.dto.QuestionRequestDTO;
-import edu.pict.questionmangement.dto.QuestionResponseDTO;
-import edu.pict.questionmangement.dto.TopicRequestDto;
-import edu.pict.questionmangement.dto.TopicResponseDTO;
+import edu.pict.questionmangement.dto.*;
 import edu.pict.questionmangement.model.Question;
 import edu.pict.questionmangement.model.Topic;
 
@@ -27,6 +24,12 @@ public class QuestionMapper {
                         .map(QuestionMapper::toTopicResponseDto)
                         .collect(Collectors.toList()))
                 .build();
+    }
+
+    public static QuestionResponseDTO toTopicResponseDtoWithTestCasesDto(Question question, TestCasesDto testCasesDto) {
+        QuestionResponseDTO questionResponseDTO = toResponseDto(question);
+        questionResponseDTO.setTestcases(testCasesDto);
+        return questionResponseDTO;
     }
 
 

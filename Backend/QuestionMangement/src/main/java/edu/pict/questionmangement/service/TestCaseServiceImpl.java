@@ -32,7 +32,7 @@ public class TestCaseServiceImpl {
      * @param testCasesDto A DTO containing a list of test cases to be stored.
      * @return A list of stored test cases in DTO format as returned by the gRPC service.
      */
-    public List<TestcaseDto> storeTestCases(TestCasesDto testCasesDto) {
+    public TestCasesDto storeTestCases(TestCasesDto testCasesDto) {
 
         // Convert DTOs to gRPC Testcase Protobuf messages
         TestCases testCases = TestCases.newBuilder()
@@ -48,9 +48,14 @@ public class TestCaseServiceImpl {
         TestCases storedTestCases = testCaseServiceBlockingStub.storeTestCases(testCases);
 
         // Convert the gRPC response back to DTOs and return
-        return storedTestCases.getTestcasesList().stream()
+        List<TestcaseDto> storedTestcases = storedTestCases.getTestcasesList().stream()
                 .map(TestCaseMapper::testCaseToTestcaseDto)
                 .toList();
+
+        return TestCasesDto.builder()
+                .questionId(testCasesDto.getQuestionId())
+                .testcases(storedTestcases)
+                .build();
     }
 
     /**

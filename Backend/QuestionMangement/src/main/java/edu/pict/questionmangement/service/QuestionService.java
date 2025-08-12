@@ -62,22 +62,23 @@ public class QuestionService {
         finalTopics.addAll(existingTopics);
         finalTopics.addAll(storedNewTopics);
 
-        // Step 6: Save question with all related topics
+        // Step 6: Convert topics to response DTOs
+        List<TopicResponseDTO> topicResponseDTOs = finalTopics.stream()
+                .map(QuestionMapper::toTopicResponseDto)
+                .toList();
+
+        // Step 7: Save question with all related topics
         Question storedQuestion = questionRepository.save(
                 QuestionMapper.toEntity(questionRequestDTO, finalTopics)
         );
 
         UUID questionId = storedQuestion.getId();
 
-        // Step 7: Store test cases via gRPC
+        // Step 8: Store test cases via gRPC
         TestCasesDto testCasesDto = questionRequestDTO.getTestcases();
         testCasesDto.setQuestionId(questionId);
-        List<TestcaseDto> storedTestCases = testCaseServiceImpl.storeTestCases(testCasesDto);
+        TestCasesDto storedTestCases = testCaseServiceImpl.storeTestCases(testCasesDto);
 
-        // Step 8: Convert topics to response DTOs
-        List<TopicResponseDTO> topicResponseDTOs = finalTopics.stream()
-                .map(QuestionMapper::toTopicResponseDto)
-                .toList();
 
         // Step 9: Build and return response
         return QuestionResponseDTO.builder()
@@ -100,11 +101,18 @@ public class QuestionService {
         return questionPage.map(QuestionMapper::toResponseDto);
     }
 
-    public Optional<QuestionResponseDTO> getQuestionById(UUID id) {
-        Optional<Question> question = questionRepository.findById(id);
-        return question.map(value -> Optional.of(QuestionMapper.toResponseDto(value))).orElseThrow(() -> new QuestionNotFoundException("Question not found", new Question()));
+    public TestCasesDto getTestCasesByQuestionId(UUID questionId) {
+        return testCaseServiceImpl.getTestCasesByQuestionId(questionId);
     }
 
+    public QuestionResponseDTO getQuestionById(UUID id) {
+        Question question = questionRepository.findById(id)
+                .orElseThrow(() -> new QuestionNotFoundException("Question not found", new Question()));
+
+        TestCasesDto testCasesDto = getTestCasesByQuestionId(id);
+
+        return QuestionMapper.toTopicResponseDtoWithTestCasesDto(question, testCasesDto);
+    }
 
     public void deleteQuestion(UUID id) {
         questionRepository.deleteById(id);
