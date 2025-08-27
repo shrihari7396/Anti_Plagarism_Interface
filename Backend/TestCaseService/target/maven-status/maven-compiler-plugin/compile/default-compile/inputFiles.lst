@@ -4,6 +4,10 @@ C:\Users\hp\Desktop\Anti Plagarism Interface\Backend\TestCaseService\src\main\ja
 C:\Users\hp\Desktop\Anti Plagarism Interface\Backend\TestCaseService\src\main\java\edu\pict\testCaseService\service\TestCaseService.java
 C:\Users\hp\Desktop\Anti Plagarism Interface\Backend\TestCaseService\src\main\java\edu\pict\testCaseService\TestCaseServiceApplication.java
 C:\Users\hp\Desktop\Anti Plagarism Interface\Backend\TestCaseService\target\generated-sources\protobuf\grpc-java\edu\pict\TestCaseServiceGrpc.java
+C:\Users\hp\Desktop\Anti Plagarism Interface\Backend\TestCaseService\target\generated-sources\protobuf\java\edu\pict\DeleteRequest.java
+C:\Users\hp\Desktop\Anti Plagarism Interface\Backend\TestCaseService\target\generated-sources\protobuf\java\edu\pict\DeleteRequestOrBuilder.java
+C:\Users\hp\Desktop\Anti Plagarism Interface\Backend\TestCaseService\target\generated-sources\protobuf\java\edu\pict\DeleteResponse.java
+C:\Users\hp\Desktop\Anti Plagarism Interface\Backend\TestCaseService\target\generated-sources\protobuf\java\edu\pict\DeleteResponseOrBuilder.java
 C:\Users\hp\Desktop\Anti Plagarism Interface\Backend\TestCaseService\target\generated-sources\protobuf\java\edu\pict\TestCase.java
 C:\Users\hp\Desktop\Anti Plagarism Interface\Backend\TestCaseService\target\generated-sources\protobuf\java\edu\pict\TestCaseOrBuilder.java
 C:\Users\hp\Desktop\Anti Plagarism Interface\Backend\TestCaseService\target\generated-sources\protobuf\java\edu\pict\TestCaseRequest.java
@@ -13,3 +17,4 @@ C:\Users\hp\Desktop\Anti Plagarism Interface\Backend\TestCaseService\target\gene
 C:\Users\hp\Desktop\Anti Plagarism Interface\Backend\TestCaseService\target\generated-sources\protobuf\java\edu\pict\TestCases.java
 C:\Users\hp\Desktop\Anti Plagarism Interface\Backend\TestCaseService\target\generated-sources\protobuf\java\edu\pict\TestcaseServiceProto.java
 C:\Users\hp\Desktop\Anti Plagarism Interface\Backend\TestCaseService\target\generated-sources\protobuf\java\edu\pict\TestCasesOrBuilder.java
+C:\Users\hp\Desktop\Anti Plagarism Interface\Backend\TestCaseService\target\generated-sources\protobuf\java\TestCaseAndSubmissionService.java

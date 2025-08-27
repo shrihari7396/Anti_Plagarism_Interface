@@ -25,7 +25,14 @@ message TestCaseResponse {
   repeated TestCase testcases = 1;
 }
 
+message DeleteRequest {
+  string questionId = 1;
+}
+
+message DeleteResponse {}
+
 service TestCaseService  {
   rpc storeTestCases (TestCases) returns (TestCases);
   rpc getTestCasesByQuestionId(TestCaseRequest) returns (TestCaseResponse);
+  rpc deleteTestCasesByQuestionID(DeleteRequest) returns (DeleteResponse);
 }

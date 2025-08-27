@@ -1,9 +1,6 @@
 package edu.pict.questionmangement.service;
 
-import edu.pict.TestCaseRequest;
-import edu.pict.TestCaseResponse;
-import edu.pict.TestCaseServiceGrpc;
-import edu.pict.TestCases;
+import edu.pict.*;
 import edu.pict.questionmangement.dto.TestCasesDto;
 import edu.pict.questionmangement.dto.TestcaseDto;
 import edu.pict.questionmangement.mapper.TestCaseMapper;
@@ -76,5 +73,11 @@ public class TestCaseServiceImpl {
 
         // Convert the gRPC response to a DTO and return
         return TestCaseMapper.TestCaseResponseToTestCasesResponseDto(response);
+    }
+
+    public boolean deleteTestCasesByQuestionId(UUID questionId) {
+        DeleteRequest request = DeleteRequest.newBuilder().setQuestionId(questionId.toString()).build();
+        DeleteResponse response = testCaseServiceBlockingStub.deleteTestCasesByQuestionID(request);
+        return response != null;
     }
 }

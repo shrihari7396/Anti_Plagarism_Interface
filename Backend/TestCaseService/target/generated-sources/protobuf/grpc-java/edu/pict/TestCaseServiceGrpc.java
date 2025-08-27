@@ -74,6 +74,37 @@ public final class TestCaseServiceGrpc {
     return getGetTestCasesByQuestionIdMethod;
   }
 
+  private static volatile io.grpc.MethodDescriptor<edu.pict.DeleteRequest,
+      edu.pict.DeleteResponse> getDeleteTestCasesByQuestionIDMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "deleteTestCasesByQuestionID",
+      requestType = edu.pict.DeleteRequest.class,
+      responseType = edu.pict.DeleteResponse.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<edu.pict.DeleteRequest,
+      edu.pict.DeleteResponse> getDeleteTestCasesByQuestionIDMethod() {
+    io.grpc.MethodDescriptor<edu.pict.DeleteRequest, edu.pict.DeleteResponse> getDeleteTestCasesByQuestionIDMethod;
+    if ((getDeleteTestCasesByQuestionIDMethod = TestCaseServiceGrpc.getDeleteTestCasesByQuestionIDMethod) == null) {
+      synchronized (TestCaseServiceGrpc.class) {
+        if ((getDeleteTestCasesByQuestionIDMethod = TestCaseServiceGrpc.getDeleteTestCasesByQuestionIDMethod) == null) {
+          TestCaseServiceGrpc.getDeleteTestCasesByQuestionIDMethod = getDeleteTestCasesByQuestionIDMethod =
+              io.grpc.MethodDescriptor.<edu.pict.DeleteRequest, edu.pict.DeleteResponse>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "deleteTestCasesByQuestionID"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  edu.pict.DeleteRequest.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  edu.pict.DeleteResponse.getDefaultInstance()))
+              .setSchemaDescriptor(new TestCaseServiceMethodDescriptorSupplier("deleteTestCasesByQuestionID"))
+              .build();
+        }
+      }
+    }
+    return getDeleteTestCasesByQuestionIDMethod;
+  }
+
   /**
    * Creates a new async stub that supports all call types for the service
    */
@@ -150,6 +181,13 @@ public final class TestCaseServiceGrpc {
         io.grpc.stub.StreamObserver<edu.pict.TestCaseResponse> responseObserver) {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getGetTestCasesByQuestionIdMethod(), responseObserver);
     }
+
+    /**
+     */
+    default void deleteTestCasesByQuestionID(edu.pict.DeleteRequest request,
+        io.grpc.stub.StreamObserver<edu.pict.DeleteResponse> responseObserver) {
+      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getDeleteTestCasesByQuestionIDMethod(), responseObserver);
+    }
   }
 
   /**
@@ -194,6 +232,14 @@ public final class TestCaseServiceGrpc {
       io.grpc.stub.ClientCalls.asyncUnaryCall(
           getChannel().newCall(getGetTestCasesByQuestionIdMethod(), getCallOptions()), request, responseObserver);
     }
+
+    /**
+     */
+    public void deleteTestCasesByQuestionID(edu.pict.DeleteRequest request,
+        io.grpc.stub.StreamObserver<edu.pict.DeleteResponse> responseObserver) {
+      io.grpc.stub.ClientCalls.asyncUnaryCall(
+          getChannel().newCall(getDeleteTestCasesByQuestionIDMethod(), getCallOptions()), request, responseObserver);
+    }
   }
 
   /**
@@ -225,6 +271,13 @@ public final class TestCaseServiceGrpc {
       return io.grpc.stub.ClientCalls.blockingUnaryCall(
           getChannel(), getGetTestCasesByQuestionIdMethod(), getCallOptions(), request);
     }
+
+    /**
+     */
+    public edu.pict.DeleteResponse deleteTestCasesByQuestionID(edu.pict.DeleteRequest request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getDeleteTestCasesByQuestionIDMethod(), getCallOptions(), request);
+    }
   }
 
   /**
@@ -255,6 +308,13 @@ public final class TestCaseServiceGrpc {
     public edu.pict.TestCaseResponse getTestCasesByQuestionId(edu.pict.TestCaseRequest request) {
       return io.grpc.stub.ClientCalls.blockingUnaryCall(
           getChannel(), getGetTestCasesByQuestionIdMethod(), getCallOptions(), request);
+    }
+
+    /**
+     */
+    public edu.pict.DeleteResponse deleteTestCasesByQuestionID(edu.pict.DeleteRequest request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getDeleteTestCasesByQuestionIDMethod(), getCallOptions(), request);
     }
   }
 
@@ -289,10 +349,19 @@ public final class TestCaseServiceGrpc {
       return io.grpc.stub.ClientCalls.futureUnaryCall(
           getChannel().newCall(getGetTestCasesByQuestionIdMethod(), getCallOptions()), request);
     }
+
+    /**
+     */
+    public com.google.common.util.concurrent.ListenableFuture<edu.pict.DeleteResponse> deleteTestCasesByQuestionID(
+        edu.pict.DeleteRequest request) {
+      return io.grpc.stub.ClientCalls.futureUnaryCall(
+          getChannel().newCall(getDeleteTestCasesByQuestionIDMethod(), getCallOptions()), request);
+    }
   }
 
   private static final int METHODID_STORE_TEST_CASES = 0;
   private static final int METHODID_GET_TEST_CASES_BY_QUESTION_ID = 1;
+  private static final int METHODID_DELETE_TEST_CASES_BY_QUESTION_ID = 2;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -318,6 +387,10 @@ public final class TestCaseServiceGrpc {
         case METHODID_GET_TEST_CASES_BY_QUESTION_ID:
           serviceImpl.getTestCasesByQuestionId((edu.pict.TestCaseRequest) request,
               (io.grpc.stub.StreamObserver<edu.pict.TestCaseResponse>) responseObserver);
+          break;
+        case METHODID_DELETE_TEST_CASES_BY_QUESTION_ID:
+          serviceImpl.deleteTestCasesByQuestionID((edu.pict.DeleteRequest) request,
+              (io.grpc.stub.StreamObserver<edu.pict.DeleteResponse>) responseObserver);
           break;
         default:
           throw new AssertionError();
@@ -351,6 +424,13 @@ public final class TestCaseServiceGrpc {
               edu.pict.TestCaseRequest,
               edu.pict.TestCaseResponse>(
                 service, METHODID_GET_TEST_CASES_BY_QUESTION_ID)))
+        .addMethod(
+          getDeleteTestCasesByQuestionIDMethod(),
+          io.grpc.stub.ServerCalls.asyncUnaryCall(
+            new MethodHandlers<
+              edu.pict.DeleteRequest,
+              edu.pict.DeleteResponse>(
+                service, METHODID_DELETE_TEST_CASES_BY_QUESTION_ID)))
         .build();
   }
 
@@ -401,6 +481,7 @@ public final class TestCaseServiceGrpc {
               .setSchemaDescriptor(new TestCaseServiceFileDescriptorSupplier())
               .addMethod(getStoreTestCasesMethod())
               .addMethod(getGetTestCasesByQuestionIdMethod())
+              .addMethod(getDeleteTestCasesByQuestionIDMethod())
               .build();
         }
       }

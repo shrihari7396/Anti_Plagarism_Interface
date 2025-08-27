@@ -45,6 +45,16 @@ public final class TestcaseServiceProto {
   static final 
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_TestCaseResponse_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_DeleteRequest_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_DeleteRequest_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_DeleteResponse_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_DeleteResponse_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -59,10 +69,13 @@ public final class TestcaseServiceProto {
       "\001(\010\"=\n\tTestCases\022\022\n\nquestionId\030\001 \001(\t\022\034\n\t" +
       "testcases\030\002 \003(\0132\t.TestCase\"%\n\017TestCaseRe" +
       "quest\022\022\n\nquestionId\030\001 \001(\t\"0\n\020TestCaseRes" +
-      "ponse\022\034\n\ttestcases\030\001 \003(\0132\t.TestCase2|\n\017T" +
-      "estCaseService\022(\n\016storeTestCases\022\n.TestC" +
-      "ases\032\n.TestCases\022?\n\030getTestCasesByQuesti" +
-      "onId\022\020.TestCaseRequest\032\021.TestCaseRespons" +
+      "ponse\022\034\n\ttestcases\030\001 \003(\0132\t.TestCase\"#\n\rD" +
+      "eleteRequest\022\022\n\nquestionId\030\001 \001(\t\"\020\n\016Dele" +
+      "teResponse2\274\001\n\017TestCaseService\022(\n\016storeT" +
+      "estCases\022\n.TestCases\032\n.TestCases\022?\n\030getT" +
+      "estCasesByQuestionId\022\020.TestCaseRequest\032\021" +
+      ".TestCaseResponse\022>\n\033deleteTestCasesByQu" +
+      "estionID\022\016.DeleteRequest\032\017.DeleteRespons" +
       "eB\"\n\010edu.pictB\024TestcaseServiceProtoP\001b\006p" +
       "roto3"
     };
@@ -94,6 +107,18 @@ public final class TestcaseServiceProto {
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_TestCaseResponse_descriptor,
         new java.lang.String[] { "Testcases", });
+    internal_static_DeleteRequest_descriptor =
+      getDescriptor().getMessageTypes().get(4);
+    internal_static_DeleteRequest_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_DeleteRequest_descriptor,
+        new java.lang.String[] { "QuestionId", });
+    internal_static_DeleteResponse_descriptor =
+      getDescriptor().getMessageTypes().get(5);
+    internal_static_DeleteResponse_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_DeleteResponse_descriptor,
+        new java.lang.String[] { });
     descriptor.resolveAllFeaturesImmutable();
   }
 

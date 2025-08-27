@@ -1,12 +1,13 @@
 C:\Users\hp\Desktop\Anti Plagarism Interface\Backend\QuestionMangement\src\main\java\edu\pict\questionmangement\controller\AdminQuestionController.java
+C:\Users\hp\Desktop\Anti Plagarism Interface\Backend\QuestionMangement\src\main\java\edu\pict\questionmangement\controller\GlobalExceptionHandler.java
 C:\Users\hp\Desktop\Anti Plagarism Interface\Backend\QuestionMangement\src\main\java\edu\pict\questionmangement\controller\QuestionController.java
-C:\Users\hp\Desktop\Anti Plagarism Interface\Backend\QuestionMangement\src\main\java\edu\pict\questionmangement\controller\QuestionControllerAdvice.java
 C:\Users\hp\Desktop\Anti Plagarism Interface\Backend\QuestionMangement\src\main\java\edu\pict\questionmangement\dto\QuestionRequestDTO.java
 C:\Users\hp\Desktop\Anti Plagarism Interface\Backend\QuestionMangement\src\main\java\edu\pict\questionmangement\dto\QuestionResponseDTO.java
 C:\Users\hp\Desktop\Anti Plagarism Interface\Backend\QuestionMangement\src\main\java\edu\pict\questionmangement\dto\TestcaseDto.java
 C:\Users\hp\Desktop\Anti Plagarism Interface\Backend\QuestionMangement\src\main\java\edu\pict\questionmangement\dto\TestCasesDto.java
 C:\Users\hp\Desktop\Anti Plagarism Interface\Backend\QuestionMangement\src\main\java\edu\pict\questionmangement\dto\TopicRequestDto.java
 C:\Users\hp\Desktop\Anti Plagarism Interface\Backend\QuestionMangement\src\main\java\edu\pict\questionmangement\dto\TopicResponseDTO.java
+C:\Users\hp\Desktop\Anti Plagarism Interface\Backend\QuestionMangement\src\main\java\edu\pict\questionmangement\dto\UUIDWrapper.java
 C:\Users\hp\Desktop\Anti Plagarism Interface\Backend\QuestionMangement\src\main\java\edu\pict\questionmangement\exception\QuestionNotFoundException.java
 C:\Users\hp\Desktop\Anti Plagarism Interface\Backend\QuestionMangement\src\main\java\edu\pict\questionmangement\mapper\QuestionMapper.java
 C:\Users\hp\Desktop\Anti Plagarism Interface\Backend\QuestionMangement\src\main\java\edu\pict\questionmangement\mapper\TestCaseMapper.java
@@ -19,6 +20,10 @@ C:\Users\hp\Desktop\Anti Plagarism Interface\Backend\QuestionMangement\src\main\
 C:\Users\hp\Desktop\Anti Plagarism Interface\Backend\QuestionMangement\src\main\java\edu\pict\questionmangement\service\QuestionService.java
 C:\Users\hp\Desktop\Anti Plagarism Interface\Backend\QuestionMangement\src\main\java\edu\pict\questionmangement\service\TestCaseServiceImpl.java
 C:\Users\hp\Desktop\Anti Plagarism Interface\Backend\QuestionMangement\target\generated-sources\protobuf\grpc-java\edu\pict\TestCaseServiceGrpc.java
+C:\Users\hp\Desktop\Anti Plagarism Interface\Backend\QuestionMangement\target\generated-sources\protobuf\java\edu\pict\DeleteRequest.java
+C:\Users\hp\Desktop\Anti Plagarism Interface\Backend\QuestionMangement\target\generated-sources\protobuf\java\edu\pict\DeleteRequestOrBuilder.java
+C:\Users\hp\Desktop\Anti Plagarism Interface\Backend\QuestionMangement\target\generated-sources\protobuf\java\edu\pict\DeleteResponse.java
+C:\Users\hp\Desktop\Anti Plagarism Interface\Backend\QuestionMangement\target\generated-sources\protobuf\java\edu\pict\DeleteResponseOrBuilder.java
 C:\Users\hp\Desktop\Anti Plagarism Interface\Backend\QuestionMangement\target\generated-sources\protobuf\java\edu\pict\TestCase.java
 C:\Users\hp\Desktop\Anti Plagarism Interface\Backend\QuestionMangement\target\generated-sources\protobuf\java\edu\pict\TestCaseOrBuilder.java
 C:\Users\hp\Desktop\Anti Plagarism Interface\Backend\QuestionMangement\target\generated-sources\protobuf\java\edu\pict\TestCaseRequest.java

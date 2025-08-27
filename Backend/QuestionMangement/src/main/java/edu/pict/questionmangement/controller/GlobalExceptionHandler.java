@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 @RestControllerAdvice
-public class QuestionControllerAdvice {
+public class GlobalExceptionHandler {
     @ExceptionHandler(QuestionNotFoundException.class)
     public ResponseEntity<QuestionResponseDTO> handleQuestionNotFoundException(QuestionNotFoundException ex) {
         return ResponseEntity

@@ -40,4 +40,9 @@ public class User {
 
     @Embedded
     private Profile profile;
+
+    @PrePersist
+    public void prePersist() {
+        this.createdAt = LocalDateTime.now();
+    }
 }

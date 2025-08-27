@@ -37,4 +37,12 @@ public class TestCaseService extends TestCaseServiceGrpc.TestCaseServiceImplBase
         responseObserver.onNext(response);
         responseObserver.onCompleted();
     }
+
+    @Override
+    public void deleteTestCasesByQuestionID(DeleteRequest deleteRequest, StreamObserver<DeleteResponse> responseStreamObserver) {
+        testcaseRepository.deleteByQuestionId(UUID.fromString(deleteRequest.getQuestionId()));
+        responseStreamObserver.onNext(DeleteResponse.newBuilder().build());
+        responseStreamObserver.onCompleted();
+    }
+
 }

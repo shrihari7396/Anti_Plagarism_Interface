@@ -25,6 +25,7 @@ public class SubmissionService {
     @Autowired
     private TestManagementService  testManagementService;
 
+    // Queue
     public SubmissionResponseDto submitCode(SubmissionRequestDto submissionRequestDto) {
         // This will Extract the Testcase for test Case Service and Add it request Body of Judge0
         TestCaseDto testCaseDto = testManagementService.getFinalTestCase(submissionRequestDto.getQuestionId());
@@ -43,6 +44,7 @@ public class SubmissionService {
         return SubmissionServiceMapper.executionResultToExecutionResultDto(result);
     }
 
+    // Direct Execution
     public ExecutionResultDto instantExecutionResult(SubmissionRequestDto submissionRequestDto) {
         // This will Map the Communication and DTO Objects
         SubmissionRequest request = SubmissionServiceMapper.submissionRequestDtoToSubmissionRequest(submissionRequestDto); // Mapping is Done in Mapper class Using its static functions
