@@ -8,6 +8,7 @@ x-logging:
       max-size: 100M
 
 services:
+
   # Load Balancer for Judge0 execution servers
   nginx-lb:
     image: nginx:alpine
@@ -72,3 +73,8 @@ services:
 
 volumes:
   data:
+
+
+# Use this commands
+# docker-compose up -d db redis
+# docker-compose up -d
