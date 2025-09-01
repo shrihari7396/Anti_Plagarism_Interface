@@ -10,6 +10,7 @@
       <module fileurl="file://$PROJECT_DIR$/Backend/QuestionMangement/QuestionMangement.iml" filepath="$PROJECT_DIR$/Backend/QuestionMangement/QuestionMangement.iml" />
       <module fileurl="file://$PROJECT_DIR$/Backend/SubmissionService/SubmissionService.iml" filepath="$PROJECT_DIR$/Backend/SubmissionService/SubmissionService.iml" />
       <module fileurl="file://$PROJECT_DIR$/Backend/TestCaseService/TestCaseService.iml" filepath="$PROJECT_DIR$/Backend/TestCaseService/TestCaseService.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Backend/UserManagement/UserManagement.iml" filepath="$PROJECT_DIR$/Backend/UserManagement/UserManagement.iml" />
     </modules>
   </component>
 </project>
