@@ -1,6 +1,6 @@
 spring:
   application:
-    name: UserManagement
+    name: UserHistoryManagement
 
 
   datasource:

@@ -10,5 +10,5 @@ import java.util.UUID;
 @Repository
 public interface QuestionAndUserMappingRepository extends JpaRepository<QuestionAndUserMapping,Integer> {
     List<QuestionAndUserMapping> findByQuestionId(UUID questionId);
-    List<QuestionAndUserMapping> findByUsername(String username);
+    List<QuestionAndUserMapping> findByUsernameAndQuestionId(String username, UUID questionId);
 }
