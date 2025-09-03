@@ -8,6 +8,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.Collections;
 
@@ -42,7 +43,7 @@ public class User implements UserDetails {
     /**
      * Role of the user (e.g., ADMIN, CUSTOMER).
      */
-    @Column(nullable = false)
+    @Column(unique = true, nullable = false)
     @Enumerated(EnumType.STRING)
     private Role role;
 
@@ -70,6 +71,15 @@ public class User implements UserDetails {
     @Column(unique = true, nullable = false)
     private String phoneNumber;
 
+    @Column(name = "created_at", nullable = false)
+    private LocalDateTime createdAt;
+
+    @Column(name = "last_login")
+    private LocalDateTime lastLogin;
+
+    @Embedded
+    private Profile profile;
+
     /**
      * Returns the authorities granted to the user.
      * Maps the user's role to a Spring Security authority.
@@ -79,5 +89,10 @@ public class User implements UserDetails {
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return Collections.singleton(new SimpleGrantedAuthority(getRole().toString()));
+    }
+
+    @PrePersist
+    public void prePersist() {
+        this.createdAt = LocalDateTime.now();
     }
 }

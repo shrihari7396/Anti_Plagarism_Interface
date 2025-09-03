@@ -2,7 +2,33 @@ syntax = "proto3";
 
 
 option java_multiple_files=true;
-option java_package = "edu.pict";
+option java_package = "edu.pict.userHistory";
 option java_outer_classname="TestcaseServiceProto";
 
-message
+message UserHistory {
+  string username = 1;
+  string questionId = 2;
+  string submissionId = 3;
+}
+
+message DeleteHistoryByUsername {
+  string username = 1;
+}
+
+message DeleteHistoryByQuestionId {
+  string questionId = 1;
+}
+
+message DeleteResponse {
+  string response = 1;
+}
+
+message RegisterHistoryResponse {
+  string response = 1;
+}
+
+service UserHistoryService {
+  rpc registerHistory (UserHistory) returns (RegisterHistoryResponse);
+  rpc deleteHistoryByUsername (DeleteHistoryByUsername) returns (DeleteResponse);
+  rpc deleteHistoryByQuestionId (DeleteHistoryByQuestionId) returns (DeleteResponse);
+}

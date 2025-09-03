@@ -12,7 +12,6 @@ import java.util.UUID;
 
 @Entity
 @RequiredArgsConstructor
-@NoArgsConstructor
 @Data
 public class QuestionAndUserMapping {
     @Id

@@ -1,10 +1,6 @@
-package edu.pict.userManagement.models;
+package edu.pict.ecommerce.authservice.model;
 
-import jakarta.persistence.Basic;
-import jakarta.persistence.Column;
-import jakarta.persistence.Embeddable;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.Lob;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -16,8 +12,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 public class Profile {
-    private String name;
-
     @Lob
     @Basic(fetch = FetchType.LAZY) // hint; may require enhancement/weaving for true lazy
     @Column(name = "avatar_image", columnDefinition = "BLOB")
