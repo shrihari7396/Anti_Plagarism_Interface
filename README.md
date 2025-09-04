@@ -1,172 +1,78 @@
-# 🧑‍💻 Online Coding Platform Backend (LeetCode-like, Microservices + gRPC)
+# LeetCode-like Backend System
 
-This project is a **microservices-based backend system** for an online coding practice platform inspired by [LeetCode](https://leetcode.com/).  
-It provides features like **problem management, code submission, evaluation, user history, and authentication**.  
-The system is built using **Spring Boot**, **gRPC** for inter-service communication, and follows a **microservices architecture** with centralized configuration and service discovery.  
+A scalable, extensible coding platform backend inspired by LeetCode. Built using a robust microservices architecture with gRPC for inter-service communication.
 
 ---
 
-## 🚀 Features
+## Table of Contents
 
-- ⚡ **Microservices Architecture**
-  - Independent services for Authentication, Problems, Submissions, User History, etc.
-  - Highly decoupled and scalable design.
-
-- 🔐 **Authentication & Authorization**
-  - JWT-based authentication
-  - Role-based access (Admin/User)
-
-- 📝 **Submissions & Judge**
-  - Docker-based sandbox for secure code execution
-  - gRPC-based Judge service for evaluating code
-  - Test case execution with time & memory limits
-
-- ❓ **Problem Management**
-  - CRUD APIs for coding problems
-  - Categorization by difficulty & tags
-
-- 📜 **User History**
-  - Tracks all submissions with verdicts
-  - Analytics on user performance
-
-- 🌐 **API Gateway**
-  - Unified entry point for all client requests
-  - Routing & load balancing
-
-- 🔗 **Service Discovery**
-  - Eureka Server for dynamic service registration
-  - Config Server for centralized configuration
+- [Overview](#overview)
+- [Architecture](#architecture)
+- [Microservices & Responsibilities](#microservices--responsibilities)
+- [Tech Stack](#tech-stack)
+- [Getting Started](#getting-started)
+- [Usage](#usage)
+- [Contributing](#contributing)
+- [License](#license)
+- [Credits](#credits)
 
 ---
 
-## 🛠️ Tech Stack
+## Overview
 
-- **Framework:** Spring Boot (Java 17+)  
-- **Inter-Service Communication:** gRPC  
-- **API Gateway:** Spring Cloud Gateway  
-- **Service Discovery:** Netflix Eureka  
-- **Configuration:** Spring Cloud Config Server  
-- **Database:** MySQL / PostgreSQL  
-- **Code Execution:** Docker-based Judge (isolated sandbox)  
-- **Build Tool:** Maven  
-- **Deployment:** Docker & Kubernetes (future-ready)  
+This project implements the backend for a coding platform similar to LeetCode. It provides user management, problem management, code evaluation, contest management, leaderboards, and a full discussion forum. The platform is modular, allowing services to scale independently and be maintained or updated with minimal downtime.
 
 ---
 
-## 📂 Microservices Structure
-ApiGateway/ # Entry point for client requests
-AuthService/ # User authentication & JWT
-ConfigServer/ # Centralized configuration management
-EurekaServer/ # Service discovery
-JudgeGrpcWrapper/ # gRPC-based code execution engine
-QuestionManagement/ # CRUD operations for problems
-SubmissionService/ # Handles code submissions & verdicts
-TestCaseService/ # Stores & manages test cases
-UserHistoryManagement/ # Tracks user submissions & history
+## Architecture
+
+- **Microservices:** Each feature domain is its own service, communicating via gRPC for efficiency and strict API contracts.
+- **gRPC:** All inter-service communication uses gRPC, offering low latency and code generation across languages.
+- **Containers:** Each service can be containerized for easy scaling and deployment.
+- **Observability:** Standardized logging, monitoring, and tracing across the platform.
 
 
 ---
 
-## 🔄 System Architecture
+## Microservices & Responsibilities
 
-```mermaid
-graph TD
+| Service Name         | Description                                                                                   | Main Responsibilities                                                    |
+|--------------------- |----------------------------------------------------------------------------------------------|--------------------------------------------------------------------------|
+| **User Service**       | Handles user accounts and authentication.                                                     | - Registration & login<br>- Profile management<br>- Role-based access    |
+| **Problem Service**    | Stores and manages coding challenges and problem metadata.                                     | - CRUD on problems<br>- Problem lists/search<br>- Tagging and statistics |
+| **Submission Service** | Receives user code, stores attempts, interfaces with Judge service.                            | - Code submission<br>- Status tracking<br>- Stores verdicts & results    |
+| **Judge Service**      | Executes code submissions securely, applies testcases, and computes scores.                    | - Secure sandbox execution<br>- Testcase evaluation<br>- Assigns verdicts|
+| **Leaderboard Service**| Maintains rankings, user and contest leaderboards.                                            | - Stores/retrieves rankings<br>- Aggregates contest results              |
+| **Discussion Service** | Provides problem-specific forums, manages posts and threads.                                  | - CRUD on posts/comments<br>- Voting<br>- Moderation                     |
+| **Contest Service**    | Manages creation, scheduling, and running of contests.                                        | - Contest lifecycle<br>- Registration<br>- Score aggregation             |
+| **Notification Service**| Sends notifications for submissions, contests, and messages.                                 | - Email, in-app, push notifications<br>- Event listening/dispatch        |
+| **Gateway/API**        | Single entry-point for clients, routes/aggregates traffic to appropriate services.            | - API security<br>- Rate-limiting<br>- Aggregation of results            |
 
-Client[Frontend / Postman] -->|REST| ApiGateway
-
-subgraph CoreServices
-    AuthService -->|JWT| ApiGateway
-    QuestionManagement --> ApiGateway
-    SubmissionService --> ApiGateway
-    UserHistoryManagement --> ApiGateway
-end
-
-subgraph Judge
-    SubmissionService -->|gRPC| JudgeGrpcWrapper
-    JudgeGrpcWrapper -->|Executes Code| DockerSandbox
-end
-
-subgraph Infra
-    ConfigServer
-    EurekaServer
-end
-
-CoreServices --> EurekaServer
-Judge --> EurekaServer
-ApiGateway --> EurekaServer
-CoreServices --> ConfigServer
-Judge --> ConfigServer
-⚙️ Setup & Run
-1️⃣ Clone the Repository
-git clone https://github.com/your-username/leetcode-microservices-backend.git
-cd leetcode-microservices-backend
-
-2️⃣ Start Config & Eureka Servers
-cd ConfigServer
-./mvnw spring-boot:run
-
-cd ../EurekaServer
-./mvnw spring-boot:run
-
-3️⃣ Start Other Services
-cd ../AuthService && ./mvnw spring-boot:run
-cd ../QuestionManagement && ./mvnw spring-boot:run
-cd ../SubmissionService && ./mvnw spring-boot:run
-cd ../TestCaseService && ./mvnw spring-boot:run
-cd ../UserHistoryManagement && ./mvnw spring-boot:run
-cd ../JudgeGrpcWrapper && ./mvnw spring-boot:run
-cd ../ApiGateway && ./mvnw spring-boot:run
-
-4️⃣ Access API Gateway
-http://localhost:8080
-
-📡 API Endpoints (via API Gateway)
-👤 Authentication
-
-POST /auth/register → Register new user
-
-POST /auth/login → Login and get JWT
-
-❓ Problems
-
-GET /problems → Fetch all problems
-
-POST /problems → Create new problem (Admin only)
-
-📝 Submissions
-
-POST /submissions → Submit code
-
-GET /submissions/{userId} → Get user submission history
-
-🧪 Testing
-./mvnw test
-
-🚀 Future Improvements
-
-Contest system (like LeetCode Weekly Contests)
-
-Leaderboards & ranking system
-
-Support for additional languages (C++, Python, Java, JS, Go)
-
-Monitoring & logging with Prometheus + Grafana + ELK
-
-CI/CD pipeline with GitHub Actions / Jenkins
-
-Deployment on Kubernetes for scalability
-
-📜 License
-
-This project is licensed under the MIT License.
-Feel free to use and modify it for learning & educational purposes.
-
+*Each service is independently deployable, scales on demand, and uses its own data store.*
 
 ---
 
-⚡ This is **one complete file** — ready to be committed as `README.md`.  
+## Tech Stack
 
-Would you like me to also generate a **Postman collection JSON file** (`postman_collection.json`) so developers can directly test login, add problem, and submission APIs?
+- **Language(s):** [e.g., Go, Python, Node.js, Java]
+- **Communication:** gRPC
+- **Containerization:** Docker
+- **Databases:** [e.g., PostgreSQL, MongoDB, Redis]
+- **Orchestration:** (Optional: Kubernetes)
+- **Observability:** [e.g., Prometheus, Grafana]
+- **CI/CD:** [e.g., GitHub Actions, Jenkins]
+
+---
+
+## Getting Started
+
+### Prerequisites
+
+- Docker & Docker Compose (or your preferred orchestrator)
+- [gRPC tools] required for your language
+- [Any database/software prerequisites]
+
+### Installation
 
 
 
