@@ -4,16 +4,16 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
 
 import java.util.UUID;
 
 @Entity
 @RequiredArgsConstructor
 @Data
-public class QuestionAndUserMapping {
+@Builder
+@AllArgsConstructor
+public class HistoryEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;

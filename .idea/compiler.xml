@@ -10,16 +10,6 @@
         <module name="EurekaServer" />
         <module name="ConfigServer" />
       </profile>
-      <profile name="Annotation profile for QuestionMangement" enabled="true">
-        <sourceOutputDir name="target/generated-sources/annotations" />
-        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
-        <outputRelativeToContentRoot value="true" />
-        <processorPath useClasspath="false">
-          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.38/lombok-1.18.38.jar" />
-          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.38/lombok-1.18.38.jar" />
-        </processorPath>
-        <module name="QuestionMangement" />
-      </profile>
       <profile name="Annotation profile for UserManagement" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
@@ -30,9 +20,19 @@
         <module name="TestCaseService" />
         <module name="SubmissionService" />
         <module name="JudgeGrpcWrapper" />
-        <module name="UserHistoryManagement" />
         <module name="ApiGateway" />
         <module name="AuthService" />
+      </profile>
+      <profile name="Annotation profile for UserHistoryManagement" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="false">
+          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.38/lombok-1.18.38.jar" />
+          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.38/lombok-1.18.38.jar" />
+        </processorPath>
+        <module name="UserHistoryManagement" />
+        <module name="QuestionMangement" />
       </profile>
     </annotationProcessing>
   </component>

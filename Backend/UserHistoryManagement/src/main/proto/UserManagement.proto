@@ -27,8 +27,24 @@ message RegisterHistoryResponse {
   string response = 1;
 }
 
+message FetchRequest {
+  string username = 1;
+  string questionId = 2;
+}
+
+message FetchResponse {
+  string username = 1;
+  repeated FetchResponseOne questionHistoryOfUser = 2;
+}
+
+message FetchResponseOne {
+  string questionId = 1;
+  string submissionId = 2;
+}
+
 service UserHistoryService {
   rpc registerHistory (UserHistory) returns (RegisterHistoryResponse);
+  rpc fetchHistoryByUsernameAndQuestionId (FetchRequest) returns (FetchResponse);
   rpc deleteHistoryByUsername (DeleteHistoryByUsername) returns (DeleteResponse);
   rpc deleteHistoryByQuestionId (DeleteHistoryByQuestionId) returns (DeleteResponse);
 }
