@@ -3,14 +3,18 @@ package edu.pict.userManagement.service;
 import edu.pict.userHistory.*;
 import edu.pict.userManagement.Mapper.ObjectMapping;
 import edu.pict.userManagement.models.HistoryEntity;
-import edu.pict.userManagement.projections.QuestionAndSubmissionProjection;
+import edu.pict.userManagement.projections.SubmissionAndQuestionProjection;
+import edu.pict.userManagement.projections.SubmissionProjection;
 import edu.pict.userManagement.repository.HistoryEntityRepository;
 import io.grpc.stub.StreamObserver;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.UUID;
+import java.util.concurrent.ExecutionException;
 
 @Service
 public class UserHistoryService extends UserHistoryServiceGrpc.UserHistoryServiceImplBase {
@@ -47,9 +51,63 @@ public class UserHistoryService extends UserHistoryServiceGrpc.UserHistoryServic
         }
     }
 
-    public void fetchHistoryByUsernameAndQuestionId(FetchRequest request, StreamObserver<FetchResponse> responseObserver) {
-        List<QuestionAndSubmissionProjection> fetchResult = historyEntityRepository.
+    /**
+     * Give Complete History of user.
+     */
+    @Override
+    public void fetchUserHistoryByUsername(FetchUserHistoryRequest request,
+                                           StreamObserver<FetchUserHistoryResponse> responseObserver) {
+        try {
+            // Default size if not provided
+            int page = request.getPage() >= 0 ? request.getPage() : 0;
+            int size = request.getSize() > 0 ? request.getSize() : 10;
+
+            Page<SubmissionAndQuestionProjection> pageResult =
+                    historyEntityRepository.findByUsername(
+                            request.getUsername(),
+                            PageRequest.of(page, size)
+                    );
+
+            List<FetchUserHistoryResponseOne> historyResponseOnes = pageResult.getContent().stream()
+                    .map(submission -> FetchUserHistoryResponseOne.newBuilder()
+                            .setQuestionId(submission.getQuestionId().toString())
+                            .setSubmissionId(submission.submissionId().toString())
+                            .build())
+                    .toList();
+
+            FetchUserHistoryResponse response = FetchUserHistoryResponse.newBuilder()
+                    .setUsername(request.getUsername())
+                    .addAllQuestionHistoryOfUser(historyResponseOnes)
+                    .setPageNumber(pageResult.getNumber())
+                    .setTotalPages(pageResult.getTotalPages())
+                    .setTotalElements(pageResult.getTotalElements())
+                    .build();
+
+            responseObserver.onNext(response);
+            responseObserver.onCompleted();
+        } catch (Exception e) {
+            responseObserver.onError(e);
+        }
     }
+    @Override
+    public void fetchUserHistoryByUsernameAndQuestionId(FetchUserHistoryByUsernameAndQuestionIdRequest request, StreamObserver<FetchUserHistoryByUsernameAndQuestionIdResponse> responseObserver) {
+        try {
+            Page<SubmissionProjection> pageResult = historyEntityRepository.findByUsernameAndQuestionId(request.getUsername(), UUID.fromString(request.getQuestionId()), PageRequest.of(request.getPage(), request.getSize()));
+            List<FetchUserHistoryByUsernameAndQuestionIdResponseOne> fetchUserHistoryByUsernameAndQuestionIdResponseOnes = ObjectMapping.submissionProjectToFetchUserHistoryByUsernameAndQuestionIdOnes(pageResult.toList());
+            FetchUserHistoryByUsernameAndQuestionIdResponse fetchUserHistoryByUsernameAndQuestionIdResponse = FetchUserHistoryByUsernameAndQuestionIdResponse.newBuilder()
+                    .addAllSubmissions(fetchUserHistoryByUsernameAndQuestionIdResponseOnes)
+                    .setPageNumber(pageResult.getNumber())
+                    .setTotalPages(pageResult.getTotalPages())
+                    .setTotalElements(pageResult.getTotalElements())
+                    .build();
+            responseObserver.onNext(fetchUserHistoryByUsernameAndQuestionIdResponse);
+            responseObserver.onCompleted();
+        } catch (Exception e) {
+            responseObserver.onError(e);
+            responseObserver.onCompleted();
+        }
+    }
+
 
     /**
      * Delete history by username
