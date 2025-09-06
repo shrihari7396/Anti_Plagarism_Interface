@@ -1,6 +1,6 @@
     package edu.pict.userManagement.Mapper;
 
-    import edu.pict.userHistory.*;
+    import edu.pict.grpc.userHistory.*;
     import edu.pict.userManagement.models.HistoryEntity;
     import edu.pict.userManagement.projections.SubmissionAndQuestionProjection;
     import edu.pict.userManagement.projections.SubmissionProjection;

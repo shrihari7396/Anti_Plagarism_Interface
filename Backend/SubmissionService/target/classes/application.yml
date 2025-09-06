@@ -31,6 +31,10 @@ grpc:
       address: "static://localhost:9092"
       negotiationType: PLAINTEXT
 
+    UserHistoryManagement:
+      address: "static://localhost:9093"
+      negotiationType: plaintext
+
 server:
   port: 9099
 

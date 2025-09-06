@@ -1,9 +1,9 @@
 package edu.pict.questionmangement.mapper;
 
-import edu.pict.TestCase;
-import edu.pict.TestCaseResponse;
-import edu.pict.questionmangement.dto.TestCasesDto;
-import edu.pict.questionmangement.dto.TestcaseDto;
+import edu.pict.testCaseService.TestCase;
+import edu.pict.testCaseService.TestCaseResponse;
+import edu.pict.questionmangement.dto.textCaseServiceDto.TestCasesDto;
+import edu.pict.questionmangement.dto.textCaseServiceDto.TestcaseDto;
 
 import java.util.List;
 

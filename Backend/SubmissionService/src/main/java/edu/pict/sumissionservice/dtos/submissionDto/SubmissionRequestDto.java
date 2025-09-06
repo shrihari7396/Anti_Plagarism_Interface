@@ -14,6 +14,7 @@ import java.util.UUID;
 @NoArgsConstructor
 public class SubmissionRequestDto {
     private String username;
+    private UUID questionId;
     private String sourceCode;
     private int languageId;
     private String compilerOption;
@@ -21,5 +22,4 @@ public class SubmissionRequestDto {
     private String stdout;
     private String expectedOutput;
     private Boolean base64Encoded;
-    private UUID questionId;
 }

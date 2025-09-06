@@ -1,9 +1,21 @@
 syntax = "proto3";
 
-
 option java_multiple_files=true;
 option java_package = "edu.pict.userHistory";
 option java_outer_classname="TestcaseServiceProto";
+
+service UserHistoryService {
+  // Add history of User
+  rpc registerHistory (UserHistory) returns (RegisterHistoryResponse);
+
+  // Fetches UserHistory
+  rpc fetchUserHistoryByUsername (FetchUserHistoryRequest) returns (FetchUserHistoryResponse);
+  rpc fetchUserHistoryByUsernameAndQuestionId (FetchUserHistoryByUsernameAndQuestionIdRequest) returns (FetchUserHistoryByUsernameAndQuestionIdResponse);
+
+  // Delete User History
+  rpc deleteHistoryByUsername (DeleteHistoryByUsername) returns (DeleteResponse);
+  rpc deleteHistoryByQuestionId (DeleteHistoryByQuestionId) returns (DeleteResponse);
+}
 
 message UserHistory {
   string username = 1;
@@ -65,17 +77,4 @@ message FetchUserHistoryByUsernameAndQuestionIdResponse {
 
 message FetchUserHistoryByUsernameAndQuestionIdResponseOne {
   string submissionId = 1;
-}
-
-service UserHistoryService {
-  // Add history of User
-  rpc registerHistory (UserHistory) returns (RegisterHistoryResponse);
-
-  // Fetches UserHistory
-  rpc fetchUserHistoryByUsername (FetchUserHistoryRequest) returns (FetchUserHistoryResponse);
-  rpc fetchUserHistoryByUsernameAndQuestionId (FetchUserHistoryByUsernameAndQuestionIdRequest) returns (FetchUserHistoryByUsernameAndQuestionIdResponse);
-
-  // Delete User History
-  rpc deleteHistoryByUsername (DeleteHistoryByUsername) returns (DeleteResponse);
-  rpc deleteHistoryByQuestionId (DeleteHistoryByQuestionId) returns (DeleteResponse);
 }

@@ -1,11 +1,11 @@
 package edu.pict.JudgeGrpcWrapper.service;
 
-import edu.pict.ExecutionResult;
 import edu.pict.JudgeGrpcWrapper.dots.ExecutionResultDto;
 import edu.pict.JudgeGrpcWrapper.mapper.Mapper;
-import edu.pict.SubmissionRequest;
-import edu.pict.SubmissionResponseToken;
-import edu.pict.SubmissionServiceGrpc;
+import edu.pict.grpc.submission.ExecutionResult;
+import edu.pict.grpc.submission.SubmissionRequest;
+import edu.pict.grpc.submission.SubmissionResponseToken;
+import edu.pict.grpc.submission.SubmissionServiceGrpc;
 import io.grpc.stub.StreamObserver;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.grpc.server.service.GrpcService;
@@ -27,6 +27,7 @@ public class SubmissionServiceImpl extends SubmissionServiceGrpc.SubmissionServi
 
         SubmissionResponseToken response = SubmissionResponseToken.newBuilder()
                 .setToken(judge0Service.submitRequest(request).get("token").toString())
+
                 .build();
 
         responseObserver.onNext(response);

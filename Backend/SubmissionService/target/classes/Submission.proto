@@ -1,6 +1,5 @@
 syntax = "proto3";
 
-
 option java_multiple_files=true;
 option java_package = "edu.pict.grpc.submission";
 option java_outer_classname="SubmissionServiceProto";
@@ -28,10 +27,14 @@ message SubmissionRequest {
   string additional_files = 19; // Base64 encoded .zip content
   string callback_url = 20;
   bool base64_encoded = 21;
+  string username = 22;
+  string questionId = 23;
 }
 
 message SubmissionResponseToken {
   string token = 1;
+  string username = 2;
+  string questionId = 3;
 }
 
 message ExecutionResult {

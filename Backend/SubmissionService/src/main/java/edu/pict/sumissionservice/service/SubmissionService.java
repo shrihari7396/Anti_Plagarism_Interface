@@ -9,11 +9,15 @@ import edu.pict.sumissionservice.dtos.submissionDto.SubmissionRequestDto;
 import edu.pict.sumissionservice.dtos.submissionDto.SubmissionResponseDto;
 import edu.pict.sumissionservice.dtos.testcaseServiceDto.TestCaseDto;
 import edu.pict.sumissionservice.mapper.SubmissionServiceMapper;
+import edu.pict.userHistory.RegisterHistoryResponse;
+import edu.pict.userHistory.UserHistory;
+import lombok.extern.slf4j.Slf4j;
 import net.devh.boot.grpc.client.inject.GrpcClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 // All Method are written in this class are use in controller for give back response to user
+@Slf4j
 @Service
 public class SubmissionService {
 
@@ -24,6 +28,9 @@ public class SubmissionService {
 
     @Autowired
     private TestManagementService  testManagementService;
+
+    @Autowired
+    private UserHistoryManagementService userHistoryManagementService;
 
     // Queue
     public SubmissionResponseDto submitCode(SubmissionRequestDto submissionRequestDto) {
@@ -36,7 +43,26 @@ public class SubmissionService {
         // This will Map the Communication and DTO Objects
         SubmissionRequest request = SubmissionServiceMapper.submissionRequestDtoToSubmissionRequest(submissionRequestDto); // Mapping is Done in Mapper class Using its static functions
         SubmissionResponseToken token = serviceBlockingStub.submitRequest(request); // Calling Grpc Method
-        return SubmissionResponseDto.builder().token(token.getToken()).build();
+
+        // Final result
+        SubmissionResponseDto finalResponse =  SubmissionResponseDto.builder()
+                .token(token.getToken())
+                .questionId(token.getQuestionId())
+                .username(token.getUsername())
+                .build();
+
+        // Registers History of the user for submitting code of the question
+        RegisterHistoryResponse registerHistoryResponse = userHistoryManagementService.registerHistory(
+                UserHistory.newBuilder()
+                        .setQuestionId(finalResponse.getQuestionId())
+                        .setSubmissionId(finalResponse.getToken())
+                        .setUsername(finalResponse.getUsername())
+                        .build()
+        );
+
+        log.info("registerHistoryResponse={}", registerHistoryResponse);
+
+        return finalResponse;
     }
 
     public ExecutionResultDto getResponseUsingToken(SubmissionResponseDto submissionResponseDto) {

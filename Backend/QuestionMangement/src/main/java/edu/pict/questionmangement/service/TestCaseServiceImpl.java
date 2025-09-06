@@ -1,14 +1,15 @@
 package edu.pict.questionmangement.service;
 
-import edu.pict.*;
-import edu.pict.questionmangement.dto.TestCasesDto;
-import edu.pict.questionmangement.dto.TestcaseDto;
+import edu.pict.questionmangement.dto.textCaseServiceDto.TestCasesDto;
+import edu.pict.questionmangement.dto.textCaseServiceDto.TestcaseDto;
 import edu.pict.questionmangement.mapper.TestCaseMapper;
+import edu.pict.testCaseService.*;
 import net.devh.boot.grpc.client.inject.GrpcClient;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 /**
  * Service implementation for handling test case operations through gRPC.
@@ -34,10 +35,8 @@ public class TestCaseServiceImpl {
         // Convert DTOs to gRPC Testcase Protobuf messages
         TestCases testCases = TestCases.newBuilder()
                 .setQuestionId(testCasesDto.getQuestionId().toString()) // set QuestionId
-                .addAllTestcases(// Fill up the testcases in Arraylist
-                        testCasesDto.getTestcases().stream()
-                                .map(TestCaseMapper::testCaseDtoToTestcase)
-                                .toList()
+                .addAllTestcases(
+                    testCasesDto.getTestcases().stream().map(TestCaseMapper::testCaseDtoToTestcase).toList()
                 )
                 .build();
 

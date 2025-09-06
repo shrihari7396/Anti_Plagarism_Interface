@@ -1,7 +1,7 @@
 package edu.pict.questionmangement.controller;
 
 import edu.pict.questionmangement.exception.QuestionNotFoundException;
-import edu.pict.questionmangement.dto.QuestionResponseDTO;
+import edu.pict.questionmangement.dto.questionServiceDto.QuestionResponseDTO;
 import edu.pict.questionmangement.mapper.QuestionMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

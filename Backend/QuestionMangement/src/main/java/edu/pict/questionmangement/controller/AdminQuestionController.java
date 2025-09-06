@@ -1,10 +1,11 @@
 package edu.pict.questionmangement.controller;
 
-import edu.pict.questionmangement.dto.QuestionRequestDTO;
-import edu.pict.questionmangement.dto.QuestionResponseDTO;
+import edu.pict.questionmangement.dto.questionServiceDto.QuestionRequestDTO;
+import edu.pict.questionmangement.dto.questionServiceDto.QuestionResponseDTO;
 import edu.pict.questionmangement.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.UUID;
 
@@ -15,9 +16,12 @@ public class AdminQuestionController {
     @Autowired
     private QuestionService questionService;
 
-    @PostMapping("/addQuestion")
-    public QuestionResponseDTO addQuestion(@RequestBody QuestionRequestDTO questionRequestDTO) {
-        return questionService.addQuestion(questionRequestDTO);
+    @PostMapping(value = "/addQuestion", consumes = {"multipart/form-data"})
+    public QuestionResponseDTO addQuestion(
+            @RequestPart("question") QuestionRequestDTO questionRequestDTO,
+            @RequestPart("file") MultipartFile file) {
+
+        return questionService.addQuestion(questionRequestDTO, file);
     }
 
     @DeleteMapping("/deleteQuestion/{questionId}")

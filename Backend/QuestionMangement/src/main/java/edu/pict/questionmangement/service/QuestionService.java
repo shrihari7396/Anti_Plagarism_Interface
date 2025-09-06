@@ -1,6 +1,10 @@
 package edu.pict.questionmangement.service;
 
-import edu.pict.questionmangement.dto.*;
+import edu.pict.questionmangement.dto.questionServiceDto.QuestionRequestDTO;
+import edu.pict.questionmangement.dto.questionServiceDto.QuestionResponseDTO;
+import edu.pict.questionmangement.dto.questionServiceDto.TopicRequestDto;
+import edu.pict.questionmangement.dto.questionServiceDto.TopicResponseDTO;
+import edu.pict.questionmangement.dto.textCaseServiceDto.TestCasesDto;
 import edu.pict.questionmangement.exception.QuestionNotFoundException;
 import edu.pict.questionmangement.mapper.QuestionMapper;
 import edu.pict.questionmangement.model.Question;
@@ -14,6 +18,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -30,8 +35,11 @@ public class QuestionService {
     @Autowired
     private TestCaseServiceImpl  testCaseServiceImpl;
 
+    @Autowired
+    private CSVFileParser csvFileParser;
+
     @Transactional
-    public QuestionResponseDTO addQuestion(QuestionRequestDTO questionRequestDTO) {
+    public QuestionResponseDTO addQuestion(QuestionRequestDTO questionRequestDTO, MultipartFile file) {
         // Step 1: Extract topics from DTO
         List<TopicRequestDto> topicRequestDtos = questionRequestDTO.getTopics();
 
@@ -75,8 +83,7 @@ public class QuestionService {
         UUID questionId = storedQuestion.getId();
 
         // Step 8: Store test cases via gRPC
-        TestCasesDto testCasesDto = questionRequestDTO.getTestcases();
-        testCasesDto.setQuestionId(questionId);
+        TestCasesDto testCasesDto = csvFileParser.parseCsv(questionId, file);
         TestCasesDto storedTestCases = testCaseServiceImpl.storeTestCases(testCasesDto);
 
 
@@ -93,12 +100,11 @@ public class QuestionService {
                 .testcases(storedTestCases)
                 .build();
     }
-
-
-    public Page<QuestionResponseDTO> getPaginatedQuestions(int page, int size) {
+    
+    public List<QuestionResponseDTO> getPaginatedQuestions(int page, int size) {
         Pageable pageable = PageRequest.of(page, size, Sort.by("createdAt").ascending());
         Page<Question> questionPage = questionRepository.findAll(pageable);
-        return questionPage.map(QuestionMapper::toResponseDto);
+        return questionPage.map(QuestionMapper::toResponseDto).toList();
     }
 
     public TestCasesDto getTestCasesByQuestionId(UUID questionId) {

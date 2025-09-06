@@ -1,6 +1,10 @@
 package edu.pict.questionmangement.mapper;
 
-import edu.pict.questionmangement.dto.*;
+import edu.pict.questionmangement.dto.questionServiceDto.QuestionRequestDTO;
+import edu.pict.questionmangement.dto.questionServiceDto.QuestionResponseDTO;
+import edu.pict.questionmangement.dto.questionServiceDto.TopicRequestDto;
+import edu.pict.questionmangement.dto.questionServiceDto.TopicResponseDTO;
+import edu.pict.questionmangement.dto.textCaseServiceDto.TestCasesDto;
 import edu.pict.questionmangement.model.Question;
 import edu.pict.questionmangement.model.Topic;
 

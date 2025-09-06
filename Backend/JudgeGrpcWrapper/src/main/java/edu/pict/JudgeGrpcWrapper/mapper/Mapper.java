@@ -2,7 +2,7 @@ package edu.pict.JudgeGrpcWrapper.mapper;
 
 import edu.pict.JudgeGrpcWrapper.dots.ExecutionResultDto;
 import edu.pict.JudgeGrpcWrapper.dots.RequestDto;
-import edu.pict.SubmissionRequest;
+import edu.pict.grpc.submission.SubmissionRequest;
 
 import java.util.Map;
 

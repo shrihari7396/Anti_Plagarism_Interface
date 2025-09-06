@@ -1,7 +1,7 @@
 package edu.pict.testCaseService.mapper;
 
-import edu.pict.TestCase;
-import edu.pict.TestCases;
+import edu.pict.testCaseService.TestCase;
+import edu.pict.testCaseService.TestCases;
 import edu.pict.testCaseService.model.TestcaseEntity;
 import org.w3c.dom.stylesheets.LinkStyle;
 

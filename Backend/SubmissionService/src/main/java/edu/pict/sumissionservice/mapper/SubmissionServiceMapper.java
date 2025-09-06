@@ -9,6 +9,7 @@ import edu.pict.sumissionservice.dtos.submissionDto.SubmissionResponseDto;
 
 public class SubmissionServiceMapper {
 
+    // Below two function is for handline queue Submission
     public static SubmissionRequest submissionRequestDtoToSubmissionRequest(SubmissionRequestDto submissionRequestDto) {
         return SubmissionRequest.newBuilder()
                 .setSourceCode(submissionRequestDto.getSourceCode())
@@ -32,9 +33,20 @@ public class SubmissionServiceMapper {
                 .setAdditionalFiles("")
                 .setCallbackUrl("")
                 .setBase64Encoded(submissionRequestDto.getBase64Encoded() != null ? submissionRequestDto.getBase64Encoded() : false)
+                .setQuestionId(submissionRequestDto.getQuestionId().toString())
+                .setUsername(submissionRequestDto.getUsername())
                 .build();
     }
 
+    public static SubmissionResponseToken submissionResponseDtoToSubmissionResponseToken(SubmissionResponseDto submissionResponseDto) {
+        return SubmissionResponseToken.newBuilder()
+                .setToken(submissionResponseDto.getToken())
+                .setQuestionId(submissionResponseDto.getQuestionId())
+                .setUsername(submissionResponseDto.getUsername())
+                .build();
+    }
+
+    // This is for Instant execution
     public static ExecutionResultDto executionResultToExecutionResultDto(ExecutionResult result) {
         ExecutionResultDto.Status statusDto = ExecutionResultDto.Status.builder()
                 .id(result.getStatus().getId())
@@ -49,12 +61,6 @@ public class SubmissionServiceMapper {
                 .compile_output(result.getCompileOutput())
                 .message(result.getMessage())
                 .status(statusDto)
-                .build();
-    }
-
-    public static SubmissionResponseToken submissionResponseDtoToSubmissionResponseToken(SubmissionResponseDto submissionResponseDto) {
-        return SubmissionResponseToken.newBuilder()
-                .setToken(submissionResponseDto.getToken())
                 .build();
     }
 

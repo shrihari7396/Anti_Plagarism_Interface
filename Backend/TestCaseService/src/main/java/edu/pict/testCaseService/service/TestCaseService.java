@@ -1,6 +1,6 @@
 package edu.pict.testCaseService.service;
 
-import edu.pict.*;
+import edu.pict.testCaseService.*;
 import edu.pict.testCaseService.mapper.TestCaseMapper;
 import edu.pict.testCaseService.model.TestcaseEntity;
 import edu.pict.testCaseService.repository.TestcaseRepository;
@@ -20,29 +20,60 @@ public class TestCaseService extends TestCaseServiceGrpc.TestCaseServiceImplBase
     @Override
     public void storeTestCases(TestCases request,
                                StreamObserver<TestCases> responseObserver) {
-        List<TestcaseEntity> testcaseEntities = TestCaseMapper.testcasesToTestcaseEntities(request);
-        testcaseRepository.saveAll(testcaseEntities);
-        responseObserver.onNext(request);
-        responseObserver.onCompleted();
+        try {
+            List<TestcaseEntity> testcaseEntities = TestCaseMapper.testcasesToTestcaseEntities(request);
+            testcaseRepository.saveAll(testcaseEntities);
+            responseObserver.onNext(request);
+            responseObserver.onCompleted();
+        } catch (Exception e) {
+            responseObserver.onError(e);
+            responseObserver.onCompleted();
+        }
     }
 
     @Override
     public void getTestCasesByQuestionId(TestCaseRequest request,
                                          StreamObserver<TestCaseResponse> responseObserver) {
-        List<TestcaseEntity> testcaseEntities = testcaseRepository.findByQuestionIdAndHidden(UUID.fromString(request.getQuestionId()), false);
-        List<TestCase> testCases = testcaseEntities.parallelStream().map(TestCaseMapper::testCaseEntityToTestCase).toList();
-        TestCaseResponse response = TestCaseResponse.newBuilder()
-                .addAllTestcases(testCases)
-                .build();
-        responseObserver.onNext(response);
-        responseObserver.onCompleted();
+        try {
+            List<TestcaseEntity> testcaseEntities = testcaseRepository.findByQuestionId(UUID.fromString(request.getQuestionId()));
+            List<TestCase> testCases = testcaseEntities.stream().map(TestCaseMapper::testCaseEntityToTestCase).toList();
+            TestCaseResponse response = TestCaseResponse.newBuilder()
+                    .addAllTestcases(testCases)
+                    .build();
+            responseObserver.onNext(response);
+            responseObserver.onCompleted();
+        } catch (Exception e) {
+            responseObserver.onError(e);
+            responseObserver.onCompleted();
+        }
     }
 
     @Override
-    public void deleteTestCasesByQuestionID(DeleteRequest deleteRequest, StreamObserver<DeleteResponse> responseStreamObserver) {
-        testcaseRepository.deleteByQuestionId(UUID.fromString(deleteRequest.getQuestionId()));
-        responseStreamObserver.onNext(DeleteResponse.newBuilder().build());
-        responseStreamObserver.onCompleted();
+    public void getVisibleTestCasesByQuestionId(TestCaseRequest request, StreamObserver<TestCaseResponse> responseObserver) {
+        try {
+            List<TestcaseEntity> visibleTestcases = testcaseRepository.findByQuestionIdAndHidden(UUID.fromString(request.getQuestionId()), false);
+            List<TestCase> testCases = visibleTestcases.stream().map(TestCaseMapper::testCaseEntityToTestCase).toList();
+            TestCaseResponse response = TestCaseResponse.newBuilder()
+                    .addAllTestcases(testCases)
+                    .build();
+            responseObserver.onNext(response);
+            responseObserver.onCompleted();
+        } catch (Exception e) {
+            responseObserver.onError(e);
+            responseObserver.onCompleted();
+        }
     }
 
+
+    @Override
+    public void deleteTestCasesByQuestionID(DeleteRequest deleteRequest, StreamObserver<DeleteResponse> responseStreamObserver) {
+        try {
+            testcaseRepository.deleteByQuestionId(UUID.fromString(deleteRequest.getQuestionId()));
+            responseStreamObserver.onNext(DeleteResponse.newBuilder().build());
+            responseStreamObserver.onCompleted();
+        } catch (Exception e) {
+            responseStreamObserver.onError(e);
+            responseStreamObserver.onCompleted();
+        }
+    }
 }
