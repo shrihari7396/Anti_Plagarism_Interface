@@ -1,4 +1,4 @@
-package edu.pict.sumissionservice.dtos;
+package edu.pict.sumissionservice.dtos.submissionDto;
 
 
 import lombok.AllArgsConstructor;

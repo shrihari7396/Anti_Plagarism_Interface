@@ -14,7 +14,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.UUID;
-import java.util.concurrent.ExecutionException;
 
 @Service
 public class UserHistoryService extends UserHistoryServiceGrpc.UserHistoryServiceImplBase {
@@ -87,6 +86,7 @@ public class UserHistoryService extends UserHistoryServiceGrpc.UserHistoryServic
             responseObserver.onCompleted();
         } catch (Exception e) {
             responseObserver.onError(e);
+            responseObserver.onCompleted();
         }
     }
     @Override

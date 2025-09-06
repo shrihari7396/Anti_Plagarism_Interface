@@ -24,3 +24,14 @@ spring:
 
 server:
   port: 8085
+
+grpc:
+  server:
+    port: 9093  # gRPC server runs on this port
+    enable-reflection: true  # Enables gRPC reflection for tools like Postman
+
+logging:
+  level:
+    org:
+      springframework:
+        web: DEBUG

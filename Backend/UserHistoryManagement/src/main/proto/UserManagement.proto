@@ -1,6 +1,5 @@
 syntax = "proto3";
 
-
 option java_multiple_files=true;
 option java_package = "edu.pict.userHistory";
 option java_outer_classname="TestcaseServiceProto";
@@ -53,7 +52,6 @@ message FetchUserHistoryByUsernameAndQuestionIdRequest {
   string questionId = 2;
   int32 page = 3;  // 0-based page index
   int32 size = 4;  // page size
-
 }
 
 message FetchUserHistoryByUsernameAndQuestionIdResponse {
@@ -69,11 +67,14 @@ message FetchUserHistoryByUsernameAndQuestionIdResponseOne {
 }
 
 service UserHistoryService {
+  // Add history of User
   rpc registerHistory (UserHistory) returns (RegisterHistoryResponse);
 
+  // Fetches UserHistory
   rpc fetchUserHistoryByUsername (FetchUserHistoryRequest) returns (FetchUserHistoryResponse);
   rpc fetchUserHistoryByUsernameAndQuestionId (FetchUserHistoryByUsernameAndQuestionIdRequest) returns (FetchUserHistoryByUsernameAndQuestionIdResponse);
 
+  // Delete User History
   rpc deleteHistoryByUsername (DeleteHistoryByUsername) returns (DeleteResponse);
   rpc deleteHistoryByQuestionId (DeleteHistoryByQuestionId) returns (DeleteResponse);
 }

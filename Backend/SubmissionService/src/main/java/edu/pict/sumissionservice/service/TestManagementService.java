@@ -4,7 +4,7 @@ import edu.pict.grpc.testcase.TestCase;
 import edu.pict.grpc.testcase.TestCaseRequest;
 import edu.pict.grpc.testcase.TestCaseResponse;
 import edu.pict.grpc.testcase.TestCaseServiceGrpc;
-import edu.pict.sumissionservice.dtos.TestCaseDto;
+import edu.pict.sumissionservice.dtos.testcaseServiceDto.TestCaseDto;
 import edu.pict.sumissionservice.mapper.TestCaseServiceMapper;
 import net.devh.boot.grpc.client.inject.GrpcClient;
 import org.springframework.stereotype.Service;

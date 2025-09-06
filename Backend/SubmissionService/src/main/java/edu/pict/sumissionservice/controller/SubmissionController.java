@@ -1,8 +1,8 @@
 package edu.pict.sumissionservice.controller;
 
-import edu.pict.sumissionservice.dtos.ExecutionResultDto;
-import edu.pict.sumissionservice.dtos.SubmissionRequestDto;
-import edu.pict.sumissionservice.dtos.SubmissionResponseDto;
+import edu.pict.sumissionservice.dtos.submissionDto.ExecutionResultDto;
+import edu.pict.sumissionservice.dtos.submissionDto.SubmissionRequestDto;
+import edu.pict.sumissionservice.dtos.submissionDto.SubmissionResponseDto;
 import edu.pict.sumissionservice.service.SubmissionService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -4,10 +4,10 @@ import edu.pict.grpc.submission.ExecutionResult;
 import edu.pict.grpc.submission.SubmissionRequest;
 import edu.pict.grpc.submission.SubmissionResponseToken;
 import edu.pict.grpc.submission.SubmissionServiceGrpc;
-import edu.pict.sumissionservice.dtos.ExecutionResultDto;
-import edu.pict.sumissionservice.dtos.SubmissionRequestDto;
-import edu.pict.sumissionservice.dtos.SubmissionResponseDto;
-import edu.pict.sumissionservice.dtos.TestCaseDto;
+import edu.pict.sumissionservice.dtos.submissionDto.ExecutionResultDto;
+import edu.pict.sumissionservice.dtos.submissionDto.SubmissionRequestDto;
+import edu.pict.sumissionservice.dtos.submissionDto.SubmissionResponseDto;
+import edu.pict.sumissionservice.dtos.testcaseServiceDto.TestCaseDto;
 import edu.pict.sumissionservice.mapper.SubmissionServiceMapper;
 import net.devh.boot.grpc.client.inject.GrpcClient;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +19,7 @@ public class SubmissionService {
 
     // Works as Grpc Client helps in calling grpc method
     // Configuration are present in application.yml file
-    @GrpcClient("codeSubmission")
+    @GrpcClient("CodeSubmission")
     private SubmissionServiceGrpc.SubmissionServiceBlockingStub serviceBlockingStub;
 
     @Autowired
@@ -27,6 +27,7 @@ public class SubmissionService {
 
     // Queue
     public SubmissionResponseDto submitCode(SubmissionRequestDto submissionRequestDto) {
+
         // This will Extract the Testcase for test Case Service and Add it request Body of Judge0
         TestCaseDto testCaseDto = testManagementService.getFinalTestCase(submissionRequestDto.getQuestionId());
         submissionRequestDto.setStdin(testCaseDto.getInput());

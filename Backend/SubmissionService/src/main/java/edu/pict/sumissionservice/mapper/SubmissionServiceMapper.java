@@ -3,9 +3,9 @@ package edu.pict.sumissionservice.mapper;
 import edu.pict.grpc.submission.ExecutionResult;
 import edu.pict.grpc.submission.SubmissionRequest;
 import edu.pict.grpc.submission.SubmissionResponseToken;
-import edu.pict.sumissionservice.dtos.ExecutionResultDto;
-import edu.pict.sumissionservice.dtos.SubmissionRequestDto;
-import edu.pict.sumissionservice.dtos.SubmissionResponseDto;
+import edu.pict.sumissionservice.dtos.submissionDto.ExecutionResultDto;
+import edu.pict.sumissionservice.dtos.submissionDto.SubmissionRequestDto;
+import edu.pict.sumissionservice.dtos.submissionDto.SubmissionResponseDto;
 
 public class SubmissionServiceMapper {
 
