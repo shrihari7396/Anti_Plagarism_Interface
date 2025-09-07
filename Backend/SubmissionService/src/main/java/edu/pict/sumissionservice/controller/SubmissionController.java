@@ -19,7 +19,7 @@ public class SubmissionController {
     @PostMapping("/submit")
     public SubmissionResponseDto submit(@RequestBody SubmissionRequestDto submissionRequestDto) {
         log.info("submissionRequestDto={}, from submit", submissionRequestDto);
-        return submissionService.submitCode(submissionRequestDto);
+        return submissionService.runCode(submissionRequestDto);
     }
 
     @GetMapping("/hello")

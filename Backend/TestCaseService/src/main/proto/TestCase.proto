@@ -1,6 +1,5 @@
 syntax = "proto3";
 
-
 option java_multiple_files=true;
 option java_package = "edu.pict.testCaseService";
 option java_outer_classname="TestcaseServiceProto";
@@ -11,7 +10,7 @@ service TestCaseService  {
   rpc getTestCasesByQuestionId(TestCaseRequest) returns (TestCaseResponse);
   rpc getVisibleTestCasesByQuestionId (TestCaseRequest) returns (TestCaseResponse);
 
-  rpc deleteTestCasesByQuestionID(DeleteRequest) returns (DeleteResponse);
+  rpc deleteTestCasesByQuestionID(DeleteTestCaseRequest) returns (DeleteTestCaseResponse);
 }
 
 message TestCase {
@@ -19,7 +18,6 @@ message TestCase {
   string expectedOutput = 2;
   bool hidden = 3;
 }
-
 
 message TestCases {
   string questionId = 1;
@@ -34,8 +32,8 @@ message TestCaseResponse {
   repeated TestCase testcases = 1;
 }
 
-message DeleteRequest {
+message DeleteTestCaseRequest {
   string questionId = 1;
 }
 
-message DeleteResponse {}
+message DeleteTestCaseResponse {}

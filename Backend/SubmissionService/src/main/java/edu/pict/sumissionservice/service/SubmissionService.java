@@ -4,19 +4,20 @@ import edu.pict.grpc.submission.ExecutionResult;
 import edu.pict.grpc.submission.SubmissionRequest;
 import edu.pict.grpc.submission.SubmissionResponseToken;
 import edu.pict.grpc.submission.SubmissionServiceGrpc;
+import edu.pict.grpc.userHistory.RegisterHistoryResponse;
+import edu.pict.grpc.userHistory.UserHistory;
 import edu.pict.sumissionservice.dtos.submissionDto.ExecutionResultDto;
 import edu.pict.sumissionservice.dtos.submissionDto.SubmissionRequestDto;
 import edu.pict.sumissionservice.dtos.submissionDto.SubmissionResponseDto;
 import edu.pict.sumissionservice.dtos.testcaseServiceDto.TestCaseDto;
 import edu.pict.sumissionservice.mapper.SubmissionServiceMapper;
-import edu.pict.userHistory.RegisterHistoryResponse;
-import edu.pict.userHistory.UserHistory;
 import lombok.extern.slf4j.Slf4j;
 import net.devh.boot.grpc.client.inject.GrpcClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-// All Method are written in this class are use in controller for give back response to user
+// All Method are written
+// in this class are use in controller for give back response to user
 @Slf4j
 @Service
 public class SubmissionService {
@@ -33,7 +34,7 @@ public class SubmissionService {
     private UserHistoryManagementService userHistoryManagementService;
 
     // Queue
-    public SubmissionResponseDto submitCode(SubmissionRequestDto submissionRequestDto) {
+    public SubmissionResponseDto runCode(SubmissionRequestDto submissionRequestDto) {
 
         // This will Extract the Testcase for test Case Service and Add it request Body of Judge0
         TestCaseDto testCaseDto = testManagementService.getFinalTestCase(submissionRequestDto.getQuestionId());

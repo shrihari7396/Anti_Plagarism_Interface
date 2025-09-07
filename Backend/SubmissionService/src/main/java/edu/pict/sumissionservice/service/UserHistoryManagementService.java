@@ -1,6 +1,6 @@
 package edu.pict.sumissionservice.service;
 
-import edu.pict.userHistory.*;
+import edu.pict.grpc.userHistory.*;
 import net.devh.boot.grpc.client.inject.GrpcClient;
 import org.springframework.stereotype.Service;
 

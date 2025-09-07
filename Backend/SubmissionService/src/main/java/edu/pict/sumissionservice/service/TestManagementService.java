@@ -1,11 +1,11 @@
 package edu.pict.sumissionservice.service;
 
-import edu.pict.grpc.testcase.TestCase;
-import edu.pict.grpc.testcase.TestCaseRequest;
-import edu.pict.grpc.testcase.TestCaseResponse;
-import edu.pict.grpc.testcase.TestCaseServiceGrpc;
 import edu.pict.sumissionservice.dtos.testcaseServiceDto.TestCaseDto;
 import edu.pict.sumissionservice.mapper.TestCaseServiceMapper;
+import edu.pict.testCaseService.TestCase;
+import edu.pict.testCaseService.TestCaseRequest;
+import edu.pict.testCaseService.TestCaseResponse;
+import edu.pict.testCaseService.TestCaseServiceGrpc;
 import net.devh.boot.grpc.client.inject.GrpcClient;
 import org.springframework.stereotype.Service;
 
@@ -27,6 +27,32 @@ public class TestManagementService {
 
         List<TestCase> testCaseList = testCases.getTestcasesList();
         return testCaseList.stream()
+                .map(TestCaseServiceMapper::testCaseResponseToTestCaseDto)
+                .toList();
+    }
+
+    public List<TestCaseDto> getVisibleTestCasesByQuestionId(UUID questionId) {
+        TestCaseRequest request = TestCaseRequest.newBuilder()
+                .setQuestionId(questionId.toString())
+                .build();
+
+        TestCaseResponse testCases = testCaseServiceBlockingStub.getVisibleTestCasesByQuestionId(request);
+        List<TestCase> testCasesList = testCases.getTestcasesList();
+
+        return testCasesList.stream()
+                .map(TestCaseServiceMapper::testCaseResponseToTestCaseDto)
+                .toList();
+    }
+
+    public List<TestCaseDto> getAllTestCasesByQuestionId(UUID questionId) {
+        TestCaseRequest request = TestCaseRequest.newBuilder()
+                .setQuestionId(questionId.toString())
+                .build();
+
+        TestCaseResponse testCases = testCaseServiceBlockingStub.getTestCasesByQuestionId(request);
+        List<TestCase> testCasesList = testCases.getTestcasesList();
+
+        return testCasesList.stream()
                 .map(TestCaseServiceMapper::testCaseResponseToTestCaseDto)
                 .toList();
     }
