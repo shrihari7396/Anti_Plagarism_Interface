@@ -18,6 +18,7 @@ public class SubmissionServiceImpl extends SubmissionServiceGrpc.SubmissionServi
 
     @Autowired
     private Judge0Service judge0Service;
+
     @Autowired
     private RestClient.Builder builder;
 
