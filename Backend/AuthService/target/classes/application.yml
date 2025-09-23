@@ -1,0 +1,29 @@
+spring:
+  application:
+    name: AuthService
+
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: 899961
+    url: jdbc:mysql://localhost:3306/api
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+  mvc:
+    log-request-details: true
+
+jwt:
+  secret: 7x9A$mK2#pQ8*vL5!nR3@wE6%tY1^uI4&oP7+sD0-fG9_hJ2=cV5~xZ8|aB4{mN6}qW3<eT7>yU1[iO0]lK9
+  expiration: 864000000
+
+server:
+  port: 8081
+
+
+logging:
+  level:
+    org:
+      springframework:
+        web: DEBUG

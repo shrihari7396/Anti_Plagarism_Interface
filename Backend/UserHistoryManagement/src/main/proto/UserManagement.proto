@@ -1,0 +1,80 @@
+syntax = "proto3";
+
+option java_multiple_files=true;
+option java_package = "edu.pict.grpc.userHistory";
+option java_outer_classname="TestcaseServiceProto";
+
+message UserHistory {
+  string username = 1;
+  string questionId = 2;
+  string submissionId = 3;
+}
+
+message DeleteHistoryByUsername {
+  string username = 1;
+}
+
+message DeleteHistoryByQuestionId {
+  string questionId = 1;
+}
+
+message DeleteResponse {
+  string response = 1;
+}
+
+message RegisterHistoryResponse {
+  string response = 1;
+}
+
+message FetchUserHistoryRequest {
+  string username = 1;
+  string questionId = 2;
+  int32 page = 3;  // 0-based page index
+  int32 size = 4;  // page size
+}
+
+message FetchUserHistoryResponse {
+  string username = 1;
+  repeated FetchUserHistoryResponseOne questionHistoryOfUser = 2;
+
+  int32 pageNumber = 3;
+  int32 totalPages = 4;
+  int64 totalElements = 5;
+}
+
+message FetchUserHistoryResponseOne {
+  string questionId = 1;
+  string submissionId = 2;
+}
+
+message FetchUserHistoryByUsernameAndQuestionIdRequest {
+  string username = 1;
+  string questionId = 2;
+  int32 page = 3;  // 0-based page index
+  int32 size = 4;  // page size
+}
+
+message FetchUserHistoryByUsernameAndQuestionIdResponse {
+  repeated FetchUserHistoryByUsernameAndQuestionIdResponseOne submissions = 1;
+
+  int32 pageNumber = 2;
+  int32 totalPages = 3;
+  int64 totalElements = 4;
+}
+
+message FetchUserHistoryByUsernameAndQuestionIdResponseOne {
+  string submissionId = 1;
+}
+
+service UserHistoryService {
+  // Add history of User
+  rpc registerHistory (UserHistory) returns (RegisterHistoryResponse);
+
+  // Fetches UserHistory
+  rpc fetchUserHistoryByUsername (FetchUserHistoryRequest) returns (FetchUserHistoryResponse);
+  rpc fetchUserHistoryByUsernameAndQuestionId (FetchUserHistoryByUsernameAndQuestionIdRequest) returns (FetchUserHistoryByUsernameAndQuestionIdResponse);
+
+  // Delete User History
+  rpc deleteHistoryByUsername (DeleteHistoryByUsername) returns (DeleteResponse);
+  rpc deleteHistoryByQuestionId (DeleteHistoryByQuestionId) returns (DeleteResponse);
+}

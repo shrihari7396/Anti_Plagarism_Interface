@@ -1,0 +1,83 @@
+syntax = "proto3";
+
+option java_multiple_files=true;
+option java_package = "edu.pict.grpc.submission";
+option java_outer_classname="SubmissionServiceProto";
+
+service SubmissionService {
+  rpc submitRequest(SubmissionRequest) returns (SubmissionResponseToken);
+  rpc getResultByExecutionToken(SubmissionResponseToken) returns (ExecutionResult);
+  rpc instantExecutionResult(SubmissionRequest) returns (ExecutionResult);
+  rpc submitCode(BatchSubmissionRequest) returns (BatchSubmissionTokens);
+  rpc getSubmitCodeResponseFromTokens (BatchSubmissionTokens) returns (BatchSubmissionTokensResponse);
+}
+
+// Submission request message
+message SubmissionRequest {
+  string source_code = 1;
+  int32 language_id = 2;
+  string compiler_options = 3;
+  string command_line_arguments = 4;
+  string stdin = 5;
+  string expected_output = 6;
+  float cpu_time_limit = 7;
+  float cpu_extra_time = 8;
+  float wall_time_limit = 9;
+  float memory_limit = 10; // in KB
+  int32 stack_limit = 11;  // in KB
+  int32 max_processes_and_or_threads = 12;
+  bool enable_per_process_and_thread_time_limit = 13;
+  bool enable_per_process_and_thread_memory_limit = 14;
+  int32 max_file_size = 15; // in KB
+  bool redirect_stderr_to_stdout = 16;
+  bool enable_network = 17;
+  int32 number_of_runs = 18;
+  string additional_files = 19; // Base64 encoded .zip content
+  string callback_url = 20;
+  bool base64_encoded = 21;
+  string username = 22;
+  string questionId = 23;
+}
+
+message SubmissionResponseToken {
+  string token = 1;
+  string username = 2;
+  string questionId = 3;
+}
+
+message ExecutionResult {
+  string stdout = 1;
+  string time = 2;
+  string memory = 3;
+  string stderr = 4;
+  string token = 5;
+  string compile_output = 6;
+  string message = 7;
+  Status status = 8;
+
+  message Status {
+    int32 id = 1;
+    string description = 2;
+  }
+}
+
+
+message Judge0TestCase {
+  string input = 1;
+  string expectedOutput = 2;
+}
+
+message BatchSubmissionRequest {
+  string username = 1;
+  string sourceCode = 2;
+  int32 languageId = 3;
+  repeated Judge0TestCase testcases = 4;
+}
+
+message BatchSubmissionTokens {
+  repeated string tokens = 1;
+}
+
+message BatchSubmissionTokensResponse {
+  repeated ExecutionResult executionResult = 1;
+}
