@@ -274,6 +274,6 @@ Feel free to open issues or submit pull requests.
 Backend Developer | Microservices | Cloud | ML
 
 🔗 GitHub: [https://github.com/shrihari7396](https://github.com/shrihari7396)
-🔗 LinkedIn: [https://www.linkedin.com/in/shriharik-kulkarni]([https://www.linkedin.com/in/shriharik-kulkarni](https://www.linkedin.com/in/shrihari-kulkarni-467767299/))
+🔗 LinkedIn: [https://www.linkedin.com/in/shriharik-kulkarni]([https://www.linkedin.com/in/shrihari-kulkarni-467767299/])
 
 ---
