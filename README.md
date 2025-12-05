@@ -277,19 +277,6 @@ Please open an issue for feature requests or bug reports.
 **Shrihari Kulkarni**
 Backend Developer | Microservices | Cloud | ML
 🔗 GitHub: [https://github.com/shrihari7396](https://github.com/shrihari7396)
-🔗 LinkedIn: [https://linkedin.com/in/shriharik-kulkarni](https://linkedin.com/in/shriharik-kulkarni)
-
----
-
-# 🎉 **README Complete**
-
-This is a **high-quality, professional README** suitable for:
-
-✔ GitHub
-✔ Resume portfolio
-✔ Recruiter screening
-✔ Project demos
-✔ Hackathons
-✔ Interviews
+🔗 LinkedIn: [https://linkedin.com/in/shriharik-kulkarni](https://www.linkedin.com/in/shrihari-kulkarni-467767299/)
 
 ---
