@@ -8,9 +8,9 @@ A scalable and secure **microservices-based code assessment platform** designed 
 * Detect plagiarism
 * Execute untrusted code safely
 * Evaluate coding submissions in real-time
-* Support large-scale users (colleges, competitions, hiring platforms)
+* Support large-scale usage for colleges, coding contests, and hiring platforms
 
-The system ensures **high performance, security, and maintainability** using modern backend engineering practices.
+The platform is engineered for **high performance, security, and maintainability** using modern distributed backend architecture.
 
 ---
 
@@ -18,35 +18,35 @@ The system ensures **high performance, security, and maintainability** using mod
 
 ### ✅ **Microservices Architecture**
 
-Each service is independently deployable, scalable, and communicates over **gRPC** for low-latency performance.
+Each component is independently deployable, scalable, and communicates over **gRPC** for extremely low-latency performance.
 
 ### ✅ **Secure Code Execution (Judge0 + Docker)**
 
-* Executes code inside **isolated Docker sandboxes**
-* Prevents attacks, infinite loops, resource exploitation
+* Executes untrusted code inside **isolated Docker sandboxes**
+* Protects against infinite loops, memory exploits, fork bombs, etc.
 * Supports multiple programming languages
 
 ### ✅ **Real-Time Results**
 
-Frontend receives **live execution updates** and submission history.
+Users receive immediate execution output and detailed submission history.
 
 ### ✅ **Plagiarism Detection**
 
-Compares code submissions using:
+Supports multiple similarity-checking techniques:
 
-* Token similarity
-* AST-based structural matching
-* Custom rules
+* Token-based similarity
+* AST structural comparison
+* Custom rule-based heuristics
 
 ### ✅ **User Roles**
 
-* **Student** — submit code and see results
-* **Instructor/Admin** — manage questions, test cases, and view analytics
+* **Student** — submit solutions, view results, track history
+* **Instructor / Admin** — manage questions & test cases, monitor analytics
 
 ### ✅ **Highly Scalable**
 
-* Supports **1000+ concurrent users**
-* Avg. API response time: **< 300ms**
+* Handles **1000+ concurrent users**
+* Achieves **<300ms average API response time** using gRPC + caching
 
 ---
 
@@ -80,14 +80,14 @@ Backend/
 │── SubmissionService/
 │── TestCaseService/
 │── UserHistoryManagement/
-│── judge0-v1.13.1/ (Optional local instance)
+│── judge0-v1.13.1/   (Optional local Judge0 instance)
 ```
 
 ---
 
 # 🏗 **System Architecture**
 
-(Replace this with your Architecture.png)
+(Add your Architecture.png below this section)
 
 ```
 +------------------------------+
@@ -104,24 +104,23 @@ Backend/
    v                        v
 +--------+          +---------------+
 | Auth   | <------> |  User History |
-|Service |          |  Management   |
+|Service |          | Management    |
 +--------+          +---------------+
 
-+---------------+   +-----------------+
-| Question Mgmt |   | Submission      |
-|   Service     |   |  Service        |
-+---------------+   +-----------------+
++-----------------+   +-------------------+
+| Question Mgmt   |   | Submission Service |
++-----------------+   +-------------------+
 
 +-------------------------------------+
 |        Test Case Service            |
 +-------------------------------------+
 
 +-------------------------------------+
-|   Judge0 gRPC Wrapper (Docker)      |
+|  Judge0 gRPC Wrapper (Docker)       |
 +-------------------------------------+
 
 +-------------------------------------+
-|  Eureka Server + Config Server      |
+| Eureka Server + Config Server       |
 +-------------------------------------+
 ```
 
@@ -133,70 +132,69 @@ Backend/
 
 Handles:
 
-* User registration
-* Login
+* User registration & login
 * JWT authentication
 * Role-based access control
 
 ## 2️⃣ **QuestionManagementService**
 
-Features:
+Manages:
 
-* Create/update/delete questions
-* Add difficulty tags
-* Attach metadata
+* Adding, updating & deleting questions
+* Difficulty tagging
+* Question metadata
 
 ## 3️⃣ **TestCaseService**
 
 Stores:
 
 * Public test cases
-* Private test cases (hidden from user)
+* Hidden (private) evaluation test cases
 
 ## 4️⃣ **SubmissionService**
 
 Responsible for:
 
 * Sending code to **JudgeGrpcWrapper**
-* Evaluating output
-* Returning results to the user
+* Matching output with test cases
+* Returning results to users
 
 ## 5️⃣ **JudgeGrpcWrapper**
 
 A gRPC wrapper around **Judge0** that:
 
-* Executes code safely
-* Monitors CPU, memory, timeout
-* Prevents malicious operations
+* Executes code in Docker
+* Applies CPU/memory/time limits
+* Prevents malicious behavior
 
-## 6️⃣ **UserHistoryManagement**
+## 6️⃣ **UserHistoryManagementService**
 
 Stores:
 
-* User submissions
-* Execution results
-* Time taken
-* Status (Accepted, WA, TLE, MLE, CE, RE)
+* Submission history
+* Execution status
+* Time analysis
+* Verdict reports (AC, WA, TLE, MLE, RE, CE)
 
 ---
 
 # ⚙️ **How to Run the Project**
 
-## ✅ **1. Start Config Server**
+## 1️⃣ **Start the Config Server**
 
 ```
 cd Backend/ConfigServer
 mvn spring-boot:run
 ```
 
-## ✅ **2. Start Eureka Server**
+## 2️⃣ **Start Eureka Server**
 
 ```
 cd Backend/EurekaServer
 mvn spring-boot:run
 ```
 
-## ✅ **3. Start All Microservices**
+## 3️⃣ **Start All Microservices**
 
 Repeat:
 
@@ -205,16 +203,16 @@ cd Backend/<ServiceName>
 mvn spring-boot:run
 ```
 
-## ✅ **4. Start Judge0 Docker Container**
+## 4️⃣ **Run Judge0 Docker Container**
 
 ```
 docker pull judge0/judge0
 docker run -d -p 2358:2358 judge0/judge0
 ```
 
-Or your customized wrapper.
+(Or use your custom JudgeGrpcWrapper)
 
-## ✅ **5. Start Frontend**
+## 5️⃣ **Run the Frontend**
 
 ```
 cd Frontend
@@ -224,24 +222,22 @@ npm start
 
 ---
 
-# 📊 **API Flow (Example)**
+# 📊 **API Flow Example**
 
-### 🔹 Student Submits Code → Submission Service
-
-### 🔹 Sent to JudgeGrpcWrapper → Judge0 Sandbox
-
-### 🔹 Execution Result → Submission Service
-
-### 🔹 Store in UserHistory
-
-### 🔹 Return response to Frontend
+1. Student submits code
+2. SubmissionService receives request
+3. Sends to JudgeGrpcWrapper
+4. Wrapper sends to Judge0 sandbox
+5. Execution result returned
+6. Stored in UserHistory
+7. Sent back to frontend
 
 ---
 
-# 📈 **Performance**
+# 📈 **Performance Benchmarks**
 
-* **1000+ concurrent users handled**
-* **<300ms average response time** due to gRPC + caching
+* Handles **1000+ concurrent users**
+* Achieves **<300ms avg response time**
 * Horizontally scalable microservice design
 
 ---
@@ -249,34 +245,35 @@ npm start
 # 🛡 **Security Features**
 
 * JWT authentication
-* Role-based access
-* Docker sandboxing
+* Role-based authorization
+* Docker-based sandbox execution
 * Input validation
-* Rate limiting (optional but recommended)
+* Optional throttling / rate limiting
 
 ---
 
-# 📝 **Future Improvements**
+# 📝 **Future Enhancements**
 
-* AI-based plagiarism prediction
-* Leaderboards & competition mode
+* AI-driven plagiarism detection (ML-based similarity scoring)
+* Leaderboards & competitive programming mode
 * WebSocket real-time updates
-* Admin analytics dashboard
+* Admin analytics dashboard (graphs, insights)
 
 ---
 
-# 🙌 **Contributions**
+# 🤝 **Contributions**
 
-Pull requests are welcome!
-Please open an issue for feature requests or bug reports.
+Contributions are welcome!
+Feel free to open issues or submit pull requests.
 
 ---
 
-# 🧑‍💻 Author
+# 🧑‍💻 **Author**
 
 **Shrihari Kulkarni**
 Backend Developer | Microservices | Cloud | ML
+
 🔗 GitHub: [https://github.com/shrihari7396](https://github.com/shrihari7396)
-🔗 LinkedIn: [https://linkedin.com/in/shriharik-kulkarni](https://www.linkedin.com/in/shrihari-kulkarni-467767299/)
+🔗 LinkedIn: [https://www.linkedin.com/in/shriharik-kulkarni](https://www.linkedin.com/in/shriharik-kulkarni)
 
 ---
