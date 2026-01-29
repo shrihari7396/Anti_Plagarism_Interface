@@ -25,7 +25,7 @@ public class QuestionController {
     }
 
     @GetMapping("/get/{questionId}")
-    public QuestionResponseDTO getQuestion(@PathVariable("questionId") UUID questionId) {
-        return questionService.getQuestionById(questionId);
+    public QuestionResponseDTO getQuestion(@PathVariable("questionId") String questionId) {
+        return questionService.getQuestionById(UUID.fromString(questionId));
     }
 }

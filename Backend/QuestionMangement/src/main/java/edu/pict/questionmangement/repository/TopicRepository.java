@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @Repository
 public interface TopicRepository extends JpaRepository<Topic, Long> {
@@ -13,5 +14,5 @@ public interface TopicRepository extends JpaRepository<Topic, Long> {
 //    List<Topic> saveAllIfNotExist(List<Topic> topics);
     boolean existsByTopic(String topic);
 
-    List<Topic> findByTopicIn(List<String> topicNames);
+    List<Topic> findByTopicIn(Set<String> topicNames);
 }
