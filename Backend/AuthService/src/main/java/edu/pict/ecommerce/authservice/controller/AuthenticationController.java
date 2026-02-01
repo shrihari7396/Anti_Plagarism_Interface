@@ -7,6 +7,7 @@ import edu.pict.ecommerce.authservice.model.User;
 import edu.pict.ecommerce.authservice.service.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.DispatcherServlet;
 
 /**
  * Controller for handling authentication-related operations such as login and registration.
@@ -14,7 +15,6 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/auth")
 public class AuthenticationController {
-
     @Autowired
     private AuthService authService;
 
@@ -27,7 +27,6 @@ public class AuthenticationController {
     public String index() {
         return "Hello World";
     }
-
     /**
      * Endpoint to register a new user.
      *

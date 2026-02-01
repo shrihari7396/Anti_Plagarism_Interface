@@ -41,35 +41,20 @@ public class AuthServiceImplementation implements AuthService {
 
     @Override
     public LoginResponseDto validateUser(LoginDTO loginDTO) {
-        Authentication authentication = null;
-        try {
-            authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(loginDTO.getUsername(), loginDTO.getPassword())
-            );
+        User user = userRepository.findByUsername(loginDTO.getUsername());
 
-            if (authentication.isAuthenticated()) {
-                // 3. Get user details
-                UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-                User user = userRepository.findByUsername(loginDTO.getUsername());
+        // 4. Generate JWT
+        String token = jwtService.generateToken(
+                user.getUsername(),
+                user.getRole().toString()
+        );
 
-                // 4. Generate JWT
-                String token = jwtService.generateToken(
-                        userDetails.getUsername(),
-                        userDetails.getAuthorities().toString()
-                );
-
-                // 5. Return the response with token
-                return LoginResponseDto.builder()
-                        .firstName(user.getFirstName())
-                        .lastName(user.getLastName())
-                        .email(user.getEmail())
-                        .jwtToken(token)
-                        .build();
-            }
-        } catch (AuthenticationException e) {
-            log.error("Authentication failed: " + e.getMessage());
-            throw e;
-        }
-        return null;
+        // 5. Return the response with token
+        return LoginResponseDto.builder()
+                .firstName(user.getFirstName())
+                .lastName(user.getLastName())
+                .email(user.getEmail())
+                .jwtToken(token)
+                .build();
     }
 }

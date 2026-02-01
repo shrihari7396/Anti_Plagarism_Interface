@@ -1,6 +1,7 @@
 package edu.pict.ecommerce.authservice.dtos;
 
 import edu.pict.ecommerce.authservice.model.enums.Role;
+import jakarta.validation.constraints.Email;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -37,6 +38,7 @@ public class RegisterDTO {
     /**
      * The user's email address.
      */
+    @Email(message = "Enter Proper email")
     private String email;
 
     /**

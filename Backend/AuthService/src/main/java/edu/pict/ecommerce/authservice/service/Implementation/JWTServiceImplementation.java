@@ -25,13 +25,6 @@ public class JWTServiceImplementation implements JWTService {
 
     private Integer expiration;
     public JWTServiceImplementation(@Value("${jwt.secret}") String secretKey) {
-//        try {
-//            KeyGenerator keyGenerator = KeyGenerator.getInstance("HmacSHA256");
-//            SecretKey sk = keyGenerator.generateKey();
-//            secretKey = Base64.getEncoder().encodeToString(sk.getEncoded());
-//        } catch (NoSuchAlgorithmException e) {
-//            throw new RuntimeException(e);
-//        }
         this.secretKey = secretKey;
     }
 

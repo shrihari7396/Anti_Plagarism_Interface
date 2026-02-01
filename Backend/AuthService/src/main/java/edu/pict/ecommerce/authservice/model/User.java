@@ -4,22 +4,16 @@ import edu.pict.ecommerce.authservice.model.enums.Role;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
 
 import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.UUID;
 
-/**
- * Entity representing a user in the system.
- * Implements {@link UserDetails} for integration with Spring Security.
- */
 @Entity
 @Data
 @RequiredArgsConstructor
-public class User implements UserDetails {
+public class User {
 
     /**
      * Unique identifier for the user.
@@ -32,7 +26,7 @@ public class User implements UserDetails {
      * Unique username for authentication.
      */
     @Column(unique = true, nullable = false)
-    private String username;
+    private UUID username;
 
     /**
      * Encrypted password used for authentication.
@@ -79,17 +73,6 @@ public class User implements UserDetails {
 
     @Embedded
     private Profile profile;
-
-    /**
-     * Returns the authorities granted to the user.
-     * Maps the user's role to a Spring Security authority.
-     *
-     * @return a collection containing the user's granted authority
-     */
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return Collections.singleton(new SimpleGrantedAuthority(getRole().toString()));
-    }
 
     @PrePersist
     public void prePersist() {
